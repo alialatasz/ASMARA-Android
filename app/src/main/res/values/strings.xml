@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ASMARA</string>
+    <string name="tagline">Augmented Salatiga Monumen &amp; Arsitektur Reality</string>
+    <string name="btn_mulai_ar">MULAI KAMERA AR</string>
+    <string name="btn_koleksi">Koleksi Sejarah</string>
+    <string name="btn_cara_pakai">Cara Pakai</string>
+    <string name="scan_instruction">Arahkan kamera ke kartu bergambar</string>
+    <string name="gedung_papak_title">Gedung Papak Salatiga</string>
+    <string name="gedung_papak_desc">Gedung Papak adalah bangunan bersejarah di Salatiga yang dibangun pada masa kolonial Belanda sekitar abad ke-19. Bangunan ini memiliki arsitektur khas Eropa dengan atap datar yang menjadi ciri khasnya. Kini Gedung Papak menjadi salah satu ikon budaya dan warisan sejarah Kota Salatiga yang dilindungi.</string>
+</resources>

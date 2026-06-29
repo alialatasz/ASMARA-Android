@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_watermark">
+
+    <!-- Scrollable content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header (Small) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                android:background="@color/primary_dark"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_header_logo"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/logo_asmara"
+                    android:background="@drawable/circle_white"
+                    android:padding="4dp"
+                    android:layout_marginEnd="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ASMARA"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.05"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Augmented Salatiga Monumen\n&amp; Arsitektur Reality"
+                        android:textColor="@color/white"
+                        android:textSize="10sp"
+                        android:lineSpacingExtra="2dp"/>
+                </LinearLayout>
+
+                <!-- Tombol Toggle Notifikasi -->
+                <ImageView
+                    android:id="@+id/btn_notif_toggle"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_notif_off"
+                    android:padding="6dp"
+                    android:background="@drawable/circle_white"
+                    android:contentDescription="Toggle Notifikasi"/>
+
+            </LinearLayout>
+
+            <!-- Main Content Area -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Hero Banner -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/gedung_papak"
+                            android:scaleType="centerCrop"/>
+
+                        <!-- Gradient Overlay -->
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:background="#99000000"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tv_hero_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gedung Papak"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="2dp"
+                            app:layout_constraintBottom_toTopOf="@id/tv_hero_sub"
+                            app:layout_constraintStart_toStartOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/tv_hero_sub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Warisan Sejarah Kota Salatiga"
+                            android:textColor="#E0E0E0"
+                            android:textSize="11sp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="14dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"/>
+
+                        <ImageView
+                            android:layout_width="110dp"
+                            android:layout_height="110dp"
+                            android:src="@drawable/maskot_asmara"
+                            android:layout_marginEnd="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Greeting Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/accent_orange"
+                    app:strokeWidth="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_help_outline"
+                            app:tint="@color/accent_orange"
+                            android:layout_marginEnd="12dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Selamat Datang! Jelajahi sejarah Kota Salatiga melalui Augmented Reality."
+                            android:textColor="@color/text_dark"
+                            android:textSize="14sp"
+                            android:lineSpacingExtra="3dp"/>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- TOMBOL UTAMA: Masuk Dunia 3D (dengan animasi mencolok) -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:padding="8dp">
+
+                    <!-- Lapisan glow/bayangan berdenyut di belakang tombol -->
+                    <View
+                        android:id="@+id/glow_dunia3d"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_glow_3d"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_mulai_ar"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:text="MASUK DUNIA 3D"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        app:backgroundTint="#6200EA"
+                        app:cornerRadius="24dp"
+                        app:icon="@drawable/ic_globe"
+                        app:iconTint="@color/white"
+                        app:iconGravity="textStart"
+                        app:iconPadding="12dp"
+                        app:iconSize="28dp"
+                        app:elevation="10dp"/>
+                </FrameLayout>
+
+                <!-- Row Tombol Sekunder -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginBottom="32dp">
+
+                    <!-- Tombol Koleksi Sejarah -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_koleksi"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="6dp"
+                        app:cardBackgroundColor="#FF9800">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:src="@drawable/ic_book_outline"
+                                app:tint="@color/white"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Koleksi Sejarah"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:gravity="center"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Tombol Cara Pakai -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_cara_pakai"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="6dp"
+                        app:cardBackgroundColor="@color/accent_orange">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:layout_width="32dp"
+                                android:layout_height="32dp"
+                                android:src="@drawable/ic_help_outline"
+                                app:tint="@color/white"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cara Pakai"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                android:textStyle="bold"
+                                android:layout_marginTop="6dp"
+                                android:gravity="center"/>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+                <!-- Tombol Uji Pemahaman -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_kuis"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="32dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp"
+                    app:cardBackgroundColor="#FF9800">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:src="@drawable/ic_brain"
+                            app:tint="@color/white"
+                            android:layout_marginEnd="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="UJI PEMAHAMAN"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.05"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Info Banner -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="#FFF3E0">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/ic_help_outline"
+                            app:tint="@color/accent_orange"
+                            android:layout_marginEnd="12dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Klik tombol 'Masuk Dunia 3D' untuk melihat objek 3D Gedung Papak Salatiga!"
+                            android:textColor="@color/text_dark"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

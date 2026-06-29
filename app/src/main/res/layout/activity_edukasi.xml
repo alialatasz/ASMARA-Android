@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/camera_bg">
+
+    <!-- Area 3D Object - 2/3 layar atas dengan background simulasi AR -->
+    <FrameLayout
+        android:id="@+id/ar_viewport"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/ar_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/info_panel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.62">
+
+        <!-- Gambar nyata Gedung Papak sebagai tampilan simulasi AR -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:src="@drawable/gedung_papak"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"/>
+
+            <!-- Label 3D Object -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/badge_primary"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:layout_margin="12dp"
+                android:layout_gravity="center">
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/circle_green"
+                    android:layout_marginEnd="6dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Objek 3D Aktif"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Tombol Kembali pojok kiri atas -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_back_edu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:layout_gravity="top|start"
+            android:src="@drawable/ic_close"
+            android:contentDescription="Kembali"
+            app:backgroundTint="#DD2222"
+            app:tint="@color/white"
+            app:fabSize="normal"
+            app:elevation="8dp"/>
+
+        <!-- AR Mode indicator kanan atas -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/badge_bg"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            android:layout_margin="24dp"
+            android:layout_gravity="top|end">
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/circle_red"
+                android:layout_marginEnd="6dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AR LIVE"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Panel Info - sepertiga layar bawah -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/info_panel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:cardCornerRadius="28dp"
+        app:cardElevation="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/ar_viewport"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.42">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Drag indicator -->
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="4dp"
+                    android:background="@drawable/drag_handle"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- Row: Judul + Tombol Audio -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:id="@+id/tv_gedung_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Gedung Papak Salatiga"
+                        android:textColor="@color/primary_dark"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:lineSpacingExtra="2dp"/>
+
+                    <!-- Tombol Audio - bulat besar -->
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/btn_audio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:src="@drawable/ic_speaker"
+                        android:contentDescription="Putar Audio"
+                        app:backgroundTint="@color/primary"
+                        app:tint="@color/white"
+                        app:fabSize="normal"
+                        app:elevation="6dp"/>
+
+                </LinearLayout>
+
+                <!-- Subtitle Dinamis (Muncul saat audio diputar) -->
+                <TextView
+                    android:id="@+id/tv_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="[Teks Subtitle]"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold|italic"
+                    android:background="#FFF3E0"
+                    android:padding="12dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone"
+                    android:gravity="center"/>
+
+                <!-- Divider -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E0E8FF"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Teks Sejarah - 3 kalimat, font tebal, besar -->
+                <TextView
+                    android:id="@+id/tv_gedung_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Gedung Papak adalah bangunan bersejarah di Salatiga yang dibangun pada masa kolonial Belanda sekitar abad ke-19. Bangunan ini memiliki arsitektur khas Eropa dengan atap datar yang menjadi ciri khasnya. Kini Gedung Papak menjadi salah satu ikon budaya dan warisan sejarah Kota Salatiga yang dilindungi."
+                    android:textColor="@color/text_dark"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="6dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- Tag tahun -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📅  Abad ke-19"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:background="@drawable/tag_bg_orange"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="6dp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏛️  Kolonial Belanda"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:background="@drawable/tag_bg_blue"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="6dp"/>
+                </LinearLayout>
+
+                <!-- Tombol Lanjut Kuis -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_lanjut_kuis"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:text="🧠 UJI PEMAHAMAN"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/success"
+                    app:cornerRadius="32dp"
+                    app:elevation="8dp"
+                    android:layout_marginTop="32dp"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

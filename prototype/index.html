@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>ASMARA - Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="phone-wrapper">
+      <div class="phone">
+        <div class="screen active" id="splash">
+          <img
+            src="logo_asmara2.png"
+            class="splash-logo"
+            alt="Logo"
+            onerror="
+              this.outerHTML =
+                '<div style=\'font-size:80px;text-align:center;\'><i class=\'ph-bold ph-bank\' style=\'color:#0d2040;\'></i></div>'
+            "
+          />
+          <div class="splash-title">ASMARA</div>
+          <div class="splash-subtitle">
+            Augmented Salatiga Monumen<br />&amp; Arsitektur Reality
+          </div>
+          <div class="splash-loading">
+            <div class="loading-bar"><div class="loading-fill"></div></div>
+            <div class="loading-text">Memuat aplikasi...</div>
+          </div>
+          <img
+            src="maskot_asmara.png"
+            class="splash-maskot"
+            alt="Maskot"
+            onerror="this.remove()"
+          />
+        </div>
+
+        <div class="screen" id="home">
+          <div class="home-header">
+            <div class="header-top">
+              <img
+                src="logo_asmara2.png"
+                class="header-logo"
+                alt="Logo"
+                onerror="
+                  this.outerHTML =
+                    '<div style=\'font-size:36px;\'><i class=\'ph-bold ph-bank\' style=\'color:white;\'></i></div>'
+                "
+              />
+              <div class="header-text">
+                <h1>ASMARA</h1>
+                <p>Augmented Salatiga Monumen<br />&amp; Arsitektur Reality</p>
+              </div>
+            </div>
+            <img
+              src="maskot_asmara.png"
+              class="header-maskot"
+              alt="Maskot"
+              onerror="this.remove()"
+            />
+          </div>
+
+          <div class="home-body">
+            <!-- Hero Banner: Gedung Papak + Maskot -->
+            <div class="hero-banner">
+              <img
+                src="gedung-papak.png"
+                class="hero-img"
+                alt="Gedung Papak Salatiga"
+              />
+              <img
+                src="maskot_asmara.png"
+                class="hero-maskot"
+                alt="Maskot ASMARA"
+                onerror="this.remove()"
+              />
+              <div class="hero-overlay">
+                <div class="hero-title">Gedung Papak</div>
+                <div class="hero-sub">Warisan Sejarah Kota Salatiga</div>
+              </div>
+            </div>
+
+            <div class="welcome-card">
+              <div class="welcome-icon">
+                <i
+                  class="ph-bold ph-hand-waving"
+                  style="color: #e85d04; font-size: 24px"
+                ></i>
+              </div>
+              <div class="welcome-text">
+                <strong>Selamat Datang!</strong> Jelajahi sejarah Kota Salatiga
+                melalui Augmented Reality yang interaktif.
+              </div>
+            </div>
+
+            <button class="btn-ar" onclick="gotoScreen('camera')">
+              <span class="btn-ar-icon"
+                ><i class="ph-bold ph-camera" style="color: #ffffff"></i>
+              </span>
+              <span class="btn-ar-text">MULAI KAMERA AR</span>
+            </button>
+
+            <div class="btn-row">
+              <button
+                class="btn-secondary btn-koleksi"
+                onclick="gotoScreen('koleksi')"
+              >
+                <span class="btn-secondary-icon"
+                  ><i
+                    class="ph-bold ph-books"
+                    style="font-size: 22px; color: #ffffff"
+                  ></i
+                ></span>
+                <span class="btn-secondary-text">Koleksi Sejarah</span>
+              </button>
+              <button
+                class="btn-secondary btn-cara"
+                onclick="gotoScreen('carapakai')"
+              >
+                <span class="btn-secondary-icon"
+                  ><i
+                    class="ph-bold ph-question"
+                    style="font-size: 22px; color: #ffffff"
+                  ></i
+                ></span>
+                <span class="btn-secondary-text">Cara Pakai</span>
+              </button>
+            </div>
+
+            <button
+              class="btn-secondary btn-kuis"
+              style="
+                width: 100%;
+                flex-direction: row;
+                gap: 14px;
+                height: 64px;
+                padding: 0 20px;
+              "
+              onclick="gotoScreen('kuis')"
+            >
+              <span class="btn-secondary-icon"
+                ><i
+                  class="ph-bold ph-puzzle-piece"
+                  style="font-size: 22px; color: #ffffff"
+                ></i
+              ></span>
+              <div style="text-align: left">
+                <div class="btn-secondary-text" style="font-size: 15px">
+                  Uji Pemahaman
+                </div>
+                <div
+                  style="
+                    font-size: 10px;
+                    color: rgba(255, 255, 255, 0.7);
+                    font-weight: 500;
+                  "
+                >
+                  Kuis interaktif Gedung Papak
+                </div>
+              </div>
+              <span style="margin-left: auto; font-size: 18px">→</span>
+            </button>
+
+            <div class="info-banner">
+              <span style="font-size: 22px"
+                ><i class="ph-bold ph-lightbulb" style="color: #e85d04"></i
+              ></span>
+              <div class="info-banner-text">
+                Scan kartu bergambar untuk melihat objek 3D
+                <strong>Gedung Papak Salatiga</strong>!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen" id="camera">
+          <div class="camera-top-bar">
+            <button class="fab-round fab-back" onclick="goBack()">
+              <span class="fab-back-icon"><i class="ph-bold ph-x"></i></span>
+            </button>
+            <div class="badge-live">
+              <div class="live-dot"></div>
+              <span class="live-text">MODE KAMERA AR</span>
+            </div>
+            <div style="width: 52px"></div>
+          </div>
+          <div class="scan-area-wrapper">
+            <div class="scan-frame">
+              <div class="scan-corner corner-tl"></div>
+              <div class="scan-corner corner-tr"></div>
+              <div class="scan-corner corner-bl"></div>
+              <div class="scan-corner corner-br"></div>
+              <div class="scan-line"></div>
+              <span class="scan-icon"
+                ><i
+                  class="ph-bold ph-magnifying-glass"
+                  style="color: white; font-size: 32px"
+                ></i
+              ></span>
+            </div>
+            <div class="scan-instruction" id="scanText">
+              Arahkan kamera ke kartu bergambar
+            </div>
+            <div class="scan-progress">
+              <div class="scan-progress-fill" id="scanBar"></div>
+            </div>
+          </div>
+          <div class="camera-bottom">
+            <button class="fab-mini" onclick="showToast('Senter aktif!')">
+              <i
+                class="ph-bold ph-flashlight"
+                style="color: white; font-size: 18px"
+              ></i>
+            </button>
+            <button class="fab-main-btn" onclick="simulateDetect()">
+              <i
+                class="ph-bold ph-crosshair"
+                style="color: white; font-size: 24px"
+              ></i>
+            </button>
+            <button class="fab-mini" onclick="showToast('Buka galeri')">
+              <i
+                class="ph-bold ph-images"
+                style="color: white; font-size: 18px"
+              ></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="screen" id="edukasi">
+          <div class="ar-viewport">
+            <div class="ar-particles"></div>
+            <button class="fab-round fab-back edu-back-btn" onclick="goBack()">
+              <span class="fab-back-icon"><i class="ph-bold ph-x"></i></span>
+            </button>
+            <div class="badge-live ar-live-badge">
+              <div class="live-dot"></div>
+              <span class="live-text">AR LIVE</span>
+            </div>
+            <div class="building-3d">
+              <i class="ph-bold ph-bank" style="color: white"></i>
+            </div>
+            <div class="ar-tag">
+              <div class="ar-tag-dot"></div>
+              <span class="ar-tag-text">Objek 3D Aktif</span>
+            </div>
+          </div>
+          <div class="info-panel">
+            <div class="drag-handle"></div>
+            <div class="panel-title-row">
+              <div class="panel-title">Gedung Papak Salatiga</div>
+              <button class="audio-btn" id="audioBtn" onclick="toggleAudio()">
+                <i class="ph-bold ph-speaker-high" style="font-size: 18px"></i>
+              </button>
+            </div>
+            <div class="divider"></div>
+            <div class="desc-text">
+              Gedung Papak adalah bangunan bersejarah di Salatiga yang dibangun
+              pada masa kolonial Belanda sekitar abad ke-19. Bangunan ini
+              memiliki arsitektur khas Eropa dengan atap datar yang menjadi ciri
+              khasnya. Kini Gedung Papak menjadi salah satu ikon budaya dan
+              warisan sejarah Kota Salatiga yang dilindungi.
+            </div>
+            <div class="tags-row">
+              <span class="tag tag-orange"
+                ><i
+                  class="ph-bold ph-calendar-blank"
+                  style="font-size: 12px"
+                ></i>
+                Abad ke-19</span
+              >
+              <span class="tag tag-blue"
+                ><i class="ph-bold ph-bank" style="font-size: 12px"></i>
+                Kolonial Belanda</span
+              >
+            </div>
+            <div style="margin-top: 16px">
+              <button
+                onclick="
+                  stopAudio();
+                  gotoScreen('kuis');
+                "
+                style="
+                  width: 100%;
+                  background: linear-gradient(135deg, #c84600, #e85d04);
+                  border: none;
+                  border-radius: 14px;
+                  padding: 13px;
+                  font-size: 14px;
+                  font-weight: 700;
+                  color: white;
+                  cursor: pointer;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 10px;
+                "
+              >
+                <i class="ph-bold ph-puzzle-piece" style="font-size: 16px"></i>
+                Uji Pemahaman Sekarang!
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen" id="koleksi">
+          <div class="sub-toolbar">
+            <button class="toolbar-back" onclick="goBack()">←</button>
+            <span class="toolbar-title">Koleksi Sejarah</span>
+          </div>
+          <div class="sub-body">
+            <div class="hist-card">
+              <div class="hist-card-top">
+                <span class="hist-card-icon"
+                  ><i
+                    class="ph-bold ph-bank"
+                    style="color: #e85d04; font-size: 28px"
+                  ></i
+                ></span>
+                <div>
+                  <div class="hist-card-title">Gedung Papak</div>
+                  <div class="hist-card-sub">Abad ke-19 · Kolonial Belanda</div>
+                </div>
+              </div>
+              <div class="hist-card-desc">
+                Salah satu bangunan bersejarah di Salatiga dengan arsitektur
+                kolonial khas Eropa dan atap datar yang ikonik.
+              </div>
+              <span class="tag tag-orange" style="display: inline-block"
+                ><i class="ph-bold ph-check-circle" style="font-size: 12px"></i>
+                Tersedia AR</span
+              >
+            </div>
+            <div class="hist-card">
+              <div class="hist-card-top">
+                <span class="hist-card-icon"
+                  ><i
+                    class="ph-bold ph-building-office"
+                    style="color: #e85d04; font-size: 28px"
+                  ></i
+                ></span>
+                <div>
+                  <div class="hist-card-title">Balai Kota Salatiga</div>
+                  <div class="hist-card-sub">
+                    Abad ke-20 · Arsitektur Tropis
+                  </div>
+                </div>
+              </div>
+              <div class="hist-card-desc">
+                Pusat pemerintahan Kota Salatiga yang menjadi saksi perjalanan
+                sejarah kota ini dari masa ke masa.
+              </div>
+              <span class="tag tag-blue" style="display: inline-block"
+                ><i class="ph-bold ph-lock-simple" style="font-size: 12px"></i>
+                Segera Hadir</span
+              >
+            </div>
+            <div class="hist-card">
+              <div class="hist-card-top">
+                <span class="hist-card-icon"
+                  ><i
+                    class="ph-bold ph-church"
+                    style="color: #e85d04; font-size: 28px"
+                  ></i
+                ></span>
+                <div>
+                  <div class="hist-card-title">Gereja Katedral</div>
+                  <div class="hist-card-sub">1891 · Neo-Gotik</div>
+                </div>
+              </div>
+              <div class="hist-card-desc">
+                Gereja bersejarah bergaya neo-gotik yang menjadi salah satu
+                landmark religi dan budaya Kota Salatiga.
+              </div>
+              <span class="tag tag-blue" style="display: inline-block"
+                ><i class="ph-bold ph-lock-simple" style="font-size: 12px"></i>
+                Segera Hadir</span
+              >
+            </div>
+            <div class="hist-card">
+              <div class="hist-card-top">
+                <span class="hist-card-icon"
+                  ><i
+                    class="ph-bold ph-graduation-cap"
+                    style="color: #e85d04; font-size: 28px"
+                  ></i
+                ></span>
+                <div>
+                  <div class="hist-card-title">Sekolah Pangudi Luhur</div>
+                  <div class="hist-card-sub">1920-an · Kolonial</div>
+                </div>
+              </div>
+              <div class="hist-card-desc">
+                Bangunan sekolah bersejarah bergaya kolonial yang masih berdiri
+                kokoh dan terus digunakan hingga kini.
+              </div>
+              <span class="tag tag-blue" style="display: inline-block"
+                ><i class="ph-bold ph-lock-simple" style="font-size: 12px"></i>
+                Segera Hadir</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="screen" id="carapakai">
+          <div class="sub-toolbar">
+            <button class="toolbar-back" onclick="goBack()">←</button>
+            <span class="toolbar-title">Cara Pakai</span>
+          </div>
+          <div class="sub-body">
+            <div class="step-card">
+              <div class="step-num orange">1</div>
+              <div class="step-content">
+                <h4>
+                  <i class="ph-bold ph-camera" style="color: #ffffff"></i> Buka
+                  Kamera AR
+                </h4>
+                <p>
+                  Tekan tombol "MULAI KAMERA AR" di halaman utama untuk
+                  mengaktifkan kamera.
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num blue">2</div>
+              <div class="step-content">
+                <h4>
+                  <i class="ph-bold ph-cards" style="color: #89cff0"></i>
+                  Arahkan ke Kartu
+                </h4>
+                <p>
+                  Arahkan kamera ke kartu bergambar ASMARA hingga terdeteksi
+                  dalam bingkai scan.
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num orange">3</div>
+              <div class="step-content">
+                <h4>
+                  <i class="ph-bold ph-cube" style="color: #e85d04"></i> Lihat
+                  Objek 3D
+                </h4>
+                <p>
+                  Objek 3D Gedung Papak akan muncul di layar kamu secara
+                  augmented reality!
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num blue">4</div>
+              <div class="step-content">
+                <h4>
+                  <i class="ph-bold ph-speaker-high" style="color: #89cff0"></i>
+                  Dengarkan Narasi
+                </h4>
+                <p>
+                  Tekan tombol speaker untuk mendengarkan penjelasan sejarah
+                  dalam Bahasa Indonesia.
+                </p>
+              </div>
+            </div>
+            <div class="step-card">
+              <div class="step-num orange">5</div>
+              <div class="step-content">
+                <h4>
+                  <i class="ph-bold ph-puzzle-piece" style="color: #e85d04"></i>
+                  Kerjakan Kuis
+                </h4>
+                <p>
+                  Uji pemahaman kamu dengan menjawab kuis interaktif tentang
+                  Gedung Papak!
+                </p>
+              </div>
+            </div>
+            <div
+              style="
+                background: #e8f0fe;
+                border-radius: 16px;
+                padding: 16px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+              "
+            >
+              <span style="font-size: 24px"
+                ><i class="ph-bold ph-info" style="color: #5bb4df"></i
+              ></span>
+              <p
+                style="
+                  font-size: 12.5px;
+                  color: var(--primary-dark);
+                  line-height: 1.5;
+                "
+              >
+                Pastikan kamera mendapat cahaya yang cukup dan kartu dipegang
+                dengan stabil!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="screen" id="kuis">
+          <div class="kuis-toolbar">
+            <button
+              class="toolbar-back"
+              onclick="
+                resetKuis();
+                goBack();
+              "
+            >
+              ←
+            </button>
+            <span class="kuis-toolbar-title"
+              ><i class="ph-bold ph-puzzle-piece" style="font-size: 16px"></i>
+              Uji Pemahaman</span
+            >
+            <div style="width: 38px"></div>
+          </div>
+
+          <div id="kuis-intro">
+            <img
+              src="gedung-papak.png"
+              alt="Ikon Gedung Papak"
+              class="kuis-intro-icon"
+            />
+            <div class="kuis-intro-title">Yuk Uji Pemahamanmu!</div>
+            <div class="kuis-intro-sub">
+              Jawab pertanyaan tentang<br /><strong style="color: var(--yellow)"
+                >Gedung Papak Salatiga</strong
+              ><br />dan lihat nilaimu!
+            </div>
+            <div class="kuis-info-row">
+              <div class="kuis-info-box">
+                <div class="kuis-info-val">25</div>
+                <div class="kuis-info-label">Pertanyaan</div>
+              </div>
+              <div class="kuis-info-box">
+                <div class="kuis-info-val">40s</div>
+                <div class="kuis-info-label">Per Soal</div>
+              </div>
+              <div class="kuis-info-box">
+                <div class="kuis-info-val">
+                  <i
+                    class="ph-bold ph-star"
+                    style="color: var(--yellow); font-size: 20px"
+                  ></i>
+                </div>
+                <div class="kuis-info-label">Hadiah Bintang</div>
+              </div>
+            </div>
+            <button class="btn-mulai-kuis" onclick="startKuis()">
+              <span
+                ><i class="ph-bold ph-rocket-launch" style="font-size: 18px"></i
+              ></span>
+              Mulai Kuis!
+            </button>
+          </div>
+
+          <div id="kuis-play">
+            <div class="kuis-dot-nav">
+              <div class="kuis-meta">
+                <span class="kuis-q-num" id="qNum">Soal 1 dari 25</span>
+                <div class="kuis-timer-wrap">
+                  <span
+                    ><i
+                      class="ph-bold ph-timer"
+                      style="color: var(--orange); font-size: 14px"
+                    ></i></span
+                  ><span class="kuis-timer" id="timerDisplay">40</span>
+                </div>
+              </div>
+              <div class="kuis-dots" id="kuisDots"></div>
+            </div>
+            <div class="kuis-q-area" id="kuisQArea"></div>
+            <div class="kuis-nav-row">
+              <button
+                class="btn-prev-q"
+                id="btnPrev"
+                onclick="prevQuestion()"
+                title="Soal sebelumnya"
+              >
+                ←
+              </button>
+              <button class="btn-skip-q" id="btnSkip" onclick="skipQuestion()">
+                <i class="ph-bold ph-skip-forward" style="font-size: 14px"></i>
+                Lewati
+              </button>
+              <button class="btn-next-q" id="btnNext" onclick="nextQuestion()">
+                Lanjut →
+              </button>
+            </div>
+          </div>
+
+          <div id="kuis-result">
+            <div class="result-circle" id="resultCircle" style="--pct: 0deg">
+              <div class="result-circle-inner">
+                <div class="result-score" id="resultScore">0</div>
+                <div class="result-score-label">NILAI</div>
+              </div>
+            </div>
+            <div class="result-grade" id="resultGrade">—</div>
+            <div class="result-msg" id="resultMsg">—</div>
+            <div class="result-stats">
+              <div class="stat-box stat-correct">
+                <div class="stat-val" id="statCorrect">0</div>
+                <div class="stat-label">
+                  <i class="ph-bold ph-check-circle" style="color: #e85d04"></i>
+                  Benar
+                </div>
+              </div>
+              <div class="stat-box stat-wrong">
+                <div class="stat-val" id="statWrong">0</div>
+                <div class="stat-label">
+                  <i class="ph-bold ph-x-circle" style="color: #e74c3c"></i>
+                  Salah
+                </div>
+              </div>
+              <div class="stat-box stat-time">
+                <div class="stat-val" id="statTime">0s</div>
+                <div class="stat-label">
+                  <i class="ph-bold ph-timer" style="color: #89cff0"></i> Waktu
+                </div>
+              </div>
+            </div>
+            <div class="result-badges" id="resultBadges"></div>
+            <div class="result-btns">
+              <button class="btn-ulang" onclick="resetKuis()">
+                <i
+                  class="ph-bold ph-arrow-counter-clockwise"
+                  style="font-size: 14px"
+                ></i>
+                Ulangi
+              </button>
+              <button
+                class="btn-home-result"
+                onclick="
+                  resetKuis();
+                  goBack();
+                "
+              >
+                <i class="ph-bold ph-house" style="font-size: 14px"></i> Selesai
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="toast" id="toast"></div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

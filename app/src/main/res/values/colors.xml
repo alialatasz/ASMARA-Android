@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Color Palette ASMARA (Synced with Web Prototype) -->
+    <color name="primary">#89CFF0</color>
+    <color name="primary_dark">#5BB4DF</color>
+    <color name="primary_light">#B3E5FC</color>
+    <color name="accent_orange">#E85D04</color>
+    <color name="accent_yellow">#F4A822</color>
+    <color name="white">#FFFFFF</color>
+    <color name="off_white">#F5F7FA</color>
+    <color name="text_dark">#1A1A2E</color>
+    <color name="text_medium">#4A4A6A</color>
+    <color name="text_light">#8888AA</color>
+    <color name="success">#2ECC71</color>
+    <color name="danger">#E74C3C</color>
+    
+    <!-- Specific Components -->
+    <color name="card_bg">#FFFFFF</color>
+    <color name="overlay_dark">#CC000000</color>
+    <color name="scan_frame">#FFFFFFFF</color>
+    <color name="camera_bg">#1A1A2E</color>
+    <color name="panel_bg">#F8F9FF</color>
+    <color name="audio_btn">#89CFF0</color>
+    <color name="gradient_start">#89CFF0</color>
+    <color name="gradient_end">#5BB4DF</color>
+    <color name="ar_button">#E85D04</color>
+</resources>
