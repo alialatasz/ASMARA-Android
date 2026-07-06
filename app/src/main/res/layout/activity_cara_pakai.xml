@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_watermark">
+    android:background="@drawable/bg_pattern_tiled">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_cara_pakai"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary_dark"
-        app:titleTextColor="@color/white"
-        app:navigationIconTint="@color/white"/>
+        android:background="@drawable/bg_glass_header"
+        app:titleTextColor="@color/primary_dark"
+        app:navigationIconTint="@color/primary_dark"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,20 +29,39 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cara Menggunakan ASMARA"
+                android:text="Panduan Penggunaan ASMARA"
                 android:textColor="@color/primary_dark"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ikuti langkah-langkah berikut untuk memulai petualangan belajar geometri!"
+                android:textColor="@color/text_medium"
+                android:textSize="14sp"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- ========== CARA SCAN QR ========== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📷  Cara Scan QR Code"
+                android:textColor="@color/primary_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
 
             <!-- Langkah 1 -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/white">
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -52,48 +71,35 @@
                     android:gravity="center_vertical">
 
                     <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:text="1"
-                        android:gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:background="@drawable/tag_bg_orange"
-                        android:layout_marginEnd="16dp"/>
+                        android:gravity="center"
+                        android:background="@drawable/badge_primary"/>
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="📷  Buka Kamera AR"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tekan tombol &quot;MULAI KAMERA AR&quot; di halaman utama."
-                            android:textColor="@color/text_medium"
-                            android:textSize="13sp"
-                            android:layout_marginTop="4dp"/>
-                    </LinearLayout>
+                        android:text="Buka aplikasi ASMARA, lalu tekan tombol Scan QR di halaman utama."
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:layout_marginStart="16dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Langkah 2 -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,99 +109,35 @@
                     android:gravity="center_vertical">
 
                     <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:text="2"
-                        android:gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:background="@drawable/tag_bg_blue"
-                        android:layout_marginEnd="16dp"/>
+                        android:gravity="center"
+                        android:background="@drawable/badge_primary"/>
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🔲  Arahkan ke Lantai/Meja"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Arahkan kamera ke lantai atau meja yang terang, lalu gerakkan HP secara perlahan."
-                            android:textColor="@color/text_medium"
-                            android:textSize="13sp"
-                            android:layout_marginTop="4dp"/>
-                    </LinearLayout>
+                        android:text="Arahkan kamera HP ke QR Code yang ada di smartcard atau miniatur Gedung Papak."
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:layout_marginStart="16dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Langkah 3 -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:text="3"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:background="@drawable/tag_bg_orange"
-                        android:layout_marginEnd="16dp"/>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🏛️  Lihat Objek 3D"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Objek 3D Gedung Papak akan muncul di layar kamu secara AR!"
-                            android:textColor="@color/text_medium"
-                            android:textSize="13sp"
-                            android:layout_marginTop="4dp"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Langkah 4 -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -205,48 +147,70 @@
                     android:gravity="center_vertical">
 
                     <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:text="4"
-                        android:gravity="center"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:text="3"
                         android:textColor="@color/white"
-                        android:textSize="22sp"
+                        android:textSize="18sp"
                         android:textStyle="bold"
-                        android:background="@drawable/tag_bg_blue"
-                        android:layout_marginEnd="16dp"/>
+                        android:gravity="center"
+                        android:background="@drawable/badge_primary"/>
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🔊  Dengarkan Narasi"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Tekan tombol speaker untuk mendengarkan penjelasan sejarah dalam Bahasa Indonesia."
-                            android:textColor="@color/text_medium"
-                            android:textSize="13sp"
-                            android:layout_marginTop="4dp"/>
-                    </LinearLayout>
+                        android:text="Setelah QR Code berhasil dipindai, aplikasi akan otomatis menampilkan model 3D bangun ruang yang sesuai (Balok, Kubus, Limas, dll)."
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:layout_marginStart="16dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
-            <!-- Catatan -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- ========== CARA LIHAT 3D ========== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🖥️  Cara Melihat Objek 3D"
+                android:textColor="@color/primary_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="#E8F0FE">
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="• Geser 1 jari: Putar objek 3D ke segala arah\n\n• Cubit 2 jari: Perbesar atau perkecil objek\n\n• Tekan tombol Lihat Materi: Buka penjelasan lengkap tentang bangun ruang tersebut"
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- Info AR -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -255,23 +219,92 @@
                     android:padding="16dp"
                     android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="ℹ️"
-                        android:textSize="24sp"
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_help_outline"
+                        app:tint="#2E7D32"
                         android:layout_marginEnd="12dp"/>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Pastikan ruangan mendapat cahaya yang cukup dan gerakkan HP dengan stabil agar lantai mudah terdeteksi!"
-                            android:textColor="@color/primary_dark"
-                            android:textSize="13sp"
-                            android:lineSpacingExtra="3dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Jika HP kamu mendukung AR, kamu juga bisa melihat objek 3D di dunia nyata melalui mode Petualangan ASMARA!"
+                        android:textColor="#2E7D32"
+                        android:textSize="13sp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
+
+            <!-- ========== CARA BUKA MATERI ========== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📖  Cara Membuka Materi"
+                android:textColor="@color/primary_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Setelah model 3D muncul, tekan tombol Lihat Materi di bagian bawah layar. Kamu akan menemukan:\n\n• Pengertian bangun ruang\n• Ciri-ciri / karakteristik\n• Jaring-jaring\n• Contoh dalam kehidupan sehari-hari\n• Audio narasi "
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- ========== CARA MENGERJAKAN KUIS ========== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🧠  Cara Mengerjakan Kuis"
+                android:textColor="@color/primary_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1. Tekan tombol Kuis di halaman utama\n\n2. Masukkan nama lengkap dan kelas kamu\n\n3. Pilih nomor soal yang ingin dikerjakan (bebas urutan)\n\n4. Baca pertanyaan dan pilih jawaban A, B, atau C\n\n5. Setiap soal memiliki waktu 40 detik\n\n6. Nomor soal yang sudah dijawab akan berubah warna (hijau = benar, merah = salah)\n\n7. Setelah selesai, tekan tombol Selesai untuk melihat hasil\n\n8. Hasil kuis akan otomatis tersimpan di database guru"
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView>

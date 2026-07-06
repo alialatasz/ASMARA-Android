@@ -14,6 +14,9 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import com.google.android.material.button.MaterialButton;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -36,6 +39,41 @@ public class SplashActivity extends AppCompatActivity {
         AlphaAnimation fadeIn = new AlphaAnimation(0f, 1f);
         fadeIn.setDuration(800);
         layoutWelcome.startAnimation(fadeIn);
+
+        // ------------------ ANIMASI MASKOT WELCOME ------------------
+        ImageView ivMaskotFront = findViewById(R.id.iv_maskot_front);
+        if (ivMaskotFront != null) {
+            // Animasi Idle (Pulse)
+            ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(ivMaskotFront, "scaleX", 1.0f, 1.06f);
+            ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(ivMaskotFront, "scaleY", 1.0f, 1.06f);
+            scaleDownX.setRepeatCount(ValueAnimator.INFINITE);
+            scaleDownY.setRepeatCount(ValueAnimator.INFINITE);
+            scaleDownX.setRepeatMode(ValueAnimator.REVERSE);
+            scaleDownY.setRepeatMode(ValueAnimator.REVERSE);
+            scaleDownX.setDuration(1000);
+            scaleDownY.setDuration(1000);
+
+            AnimatorSet pulseSet = new AnimatorSet();
+            pulseSet.playTogether(scaleDownX, scaleDownY);
+
+            // Animasi Masuk (Pop-up & Bounce)
+            ivMaskotFront.setTranslationY(300f);
+            ivMaskotFront.setScaleX(0.5f);
+            ivMaskotFront.setScaleY(0.5f);
+            ivMaskotFront.setAlpha(0f);
+
+            ivMaskotFront.animate()
+                    .translationY(0f)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .alpha(1f)
+                    .setDuration(800)
+                    .setStartDelay(300)
+                    .setInterpolator(new OvershootInterpolator(1.5f))
+                    .withEndAction(pulseSet::start)
+                    .start();
+        }
+        // -----------------------------------------------------------
 
         btnMulai.setOnClickListener(v -> {
             // Disable button to prevent double-clicks

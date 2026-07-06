@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_watermark">
+    android:background="@drawable/bg_pattern_tiled">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_koleksi"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primary_dark"
-        app:titleTextColor="@color/white"
-        app:navigationIconTint="@color/white"/>
+        android:background="@drawable/bg_glass_header"
+        app:titleTextColor="@color/primary_dark"
+        app:navigationIconTint="@color/primary_dark"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,12 +35,14 @@
                 android:layout_marginBottom="16dp"/>
 
             <!-- Card 1: Gedung Papak -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -65,7 +67,7 @@
                             android:text="Gedung Papak"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="@color/primary_dark"/>
+                            android:textColor="@color/white"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -97,15 +99,17 @@
                             android:layout_marginTop="12dp"/>
                     </LinearLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Card 2: Balai Kota -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -130,7 +134,7 @@
                             android:text="Balai Kota Salatiga"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="@color/primary_dark"/>
+                            android:textColor="@color/white"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -162,15 +166,17 @@
                             android:layout_marginTop="12dp"/>
                     </LinearLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Card 3: Gereja Katedral -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -195,7 +201,7 @@
                             android:text="Gereja Katedral Salatiga"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="@color/primary_dark"/>
+                            android:textColor="@color/white"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -227,7 +233,7 @@
                             android:layout_marginTop="12dp"/>
                     </LinearLayout>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView>

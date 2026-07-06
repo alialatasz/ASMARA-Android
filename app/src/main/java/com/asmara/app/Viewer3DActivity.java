@@ -25,31 +25,64 @@ public class Viewer3DActivity extends AppCompatActivity {
     // Variabel untuk gestur
     private ScaleGestureDetector scaleGestureDetector;
     private GestureDetector gestureDetector;
-    private float currentScale = 0.5f; // Skala awal yang lebih kecil
+    private float currentScale = 0.5f;
     private float rotationAngleX = 0f;
     private float rotationAngleY = 30f;
+
+    // Data bangun ruang dari QR / Petualangan
+    private String tipeBangun = "GEDUNG";
+    private String namaBangun = "Gedung Papak";
+    private String bagianGedung = "Gedung Papak (Utuh)";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewer_3d);
 
+        // Ambil data dari Intent (dari QR Scanner atau Petualangan)
+        Intent incomingIntent = getIntent();
+        if (incomingIntent != null) {
+            tipeBangun = incomingIntent.getStringExtra("TIPE_BANGUN");
+            namaBangun = incomingIntent.getStringExtra("NAMA_BANGUN");
+            bagianGedung = incomingIntent.getStringExtra("BAGIAN_GEDUNG");
+
+            // Fallback jika data kosong
+            if (tipeBangun == null) tipeBangun = "GEDUNG";
+            if (namaBangun == null) namaBangun = "Gedung Papak";
+            if (bagianGedung == null) bagianGedung = "Gedung Papak (Utuh)";
+        }
+
         sceneView = findViewById(R.id.scene_view);
         TextView tvInfo = findViewById(R.id.tv_info_viewer);
-        MaterialButton btnEdukasi = findViewById(R.id.btn_edukasi_viewer);
+        MaterialButton btnMateri = findViewById(R.id.btn_edukasi_viewer);
         FloatingActionButton btnBack = findViewById(R.id.btn_back_viewer);
+        TextView tvJudul = findViewById(R.id.tv_judul_viewer);
+        TextView tvSubjudul = findViewById(R.id.tv_subjudul_viewer);
 
-        // GARANSI 100%: Memaksa UI untuk tampil di atas kanvas 3D
+        // GARANSI: Memaksa UI untuk tampil di atas kanvas 3D
         findViewById(R.id.header_bar_viewer).bringToFront();
         findViewById(R.id.bottom_bar_viewer).bringToFront();
+
+        // Update judul header sesuai bangun ruang
+        if (tvJudul != null) {
+            tvJudul.setText(namaBangun);
+        }
+        if (tvSubjudul != null) {
+            tvSubjudul.setText("Bagian: " + bagianGedung);
+        }
+
+        // Update teks tombol materi
+        btnMateri.setText("📖  Lihat Materi " + namaBangun);
 
         btnBack.setOnClickListener(v -> {
             finish();
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
 
-        btnEdukasi.setOnClickListener(v -> {
-            Intent intent = new Intent(Viewer3DActivity.this, EdukasiActivity.class);
+        btnMateri.setOnClickListener(v -> {
+            Intent intent = new Intent(Viewer3DActivity.this, MateriDetailActivity.class);
+            // Gunakan tipeBangun (misal: "Balok") untuk membuka materi yang sesuai
+            intent.putExtra("MATERI_TYPE", tipeBangun);
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
@@ -64,8 +97,14 @@ public class Viewer3DActivity extends AppCompatActivity {
             return true;
         });
 
+        // Tentukan file model 3D berdasarkan tipe bangun ruang
+        String namaFileModel = tentukanFileModel(tipeBangun);
+
+        // Update pesan loading
+        tvInfo.setText("Memuat model 3D " + namaBangun + "...");
+
         ModelRenderable.builder()
-                .setSource(this, android.net.Uri.parse("gedung.glb"))
+                .setSource(this, android.net.Uri.parse(namaFileModel))
                 .setIsFilamentGltf(true)
                 .build()
                 .thenAccept(renderable -> {
@@ -80,13 +119,36 @@ public class Viewer3DActivity extends AppCompatActivity {
                     modelNode.setLocalScale(new Vector3(currentScale, currentScale, currentScale));
                     updateModelRotation();
 
-                    tvInfo.setText("🏛️ Gedung Papak berhasil dimuat!\n✨ Geser 1 jari untuk memutar\n✨ Cubit 2 jari untuk memperbesar");
+                    tvInfo.setText(namaBangun + " berhasil dimuat!\n✨ Geser 1 jari untuk memutar\n✨ Cubit 2 jari untuk memperbesar");
                 })
                 .exceptionally(throwable -> {
-                    tvInfo.setText("⚠️ Oops! File gedung.glb belum ditemukan di folder assets.");
-                    Toast.makeText(this, "Gagal memuat model 3D", Toast.LENGTH_SHORT).show();
+                    tvInfo.setText("⚠️ Model 3D \"" + namaFileModel + "\" belum tersedia.\nFile .glb perlu ditambahkan ke folder assets.");
                     return null;
                 });
+    }
+
+    /**
+     * Menentukan nama file model .glb berdasarkan tipe bangun ruang.
+     * Jika model spesifik belum ada, fallback ke gedung.glb (model yang sudah ada).
+     */
+    private String tentukanFileModel(String tipe) {
+        switch (tipe) {
+            case "BALOK":
+                return "balok.glb";
+            case "KUBUS":
+                return "kubus.glb";
+            case "LIMAS":
+                return "limas.glb";
+            case "PRISMA":
+                return "prisma.glb";
+            case "TABUNG":
+                return "tabung.glb";
+            case "PERSEGI_PANJANG":
+                return "persegi_panjang.glb";
+            case "GEDUNG":
+            default:
+                return "gedung.glb";
+        }
     }
 
     private void setupGestures() {

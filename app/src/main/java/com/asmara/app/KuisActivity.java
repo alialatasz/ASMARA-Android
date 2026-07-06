@@ -161,9 +161,9 @@ public class KuisActivity extends AppCompatActivity {
         btnOpsiB.setText("B. " + opsi[1]);
         btnOpsiC.setText("C. " + opsi[2]);
 
-        if (soal.getImagePath() != null) {
+        if (soal.getImageName() != null) {
             ivKuisImage.setVisibility(View.VISIBLE);
-            int imageRes = getResources().getIdentifier(soal.getImagePath(), "drawable", getPackageName());
+            int imageRes = getResources().getIdentifier(soal.getImageName(), "drawable", getPackageName());
             if(imageRes != 0) ivKuisImage.setImageResource(imageRes);
         } else {
             ivKuisImage.setVisibility(View.GONE);
@@ -222,6 +222,22 @@ public class KuisActivity extends AppCompatActivity {
         }
     }
 
+    private android.media.MediaPlayer feedbackMediaPlayer;
+
+    private void playFeedbackSound(boolean isCorrect) {
+        if (feedbackMediaPlayer != null) {
+            feedbackMediaPlayer.release();
+        }
+        feedbackMediaPlayer = android.media.MediaPlayer.create(this, isCorrect ? R.raw.suara_benar : R.raw.suara_salah);
+        if (feedbackMediaPlayer != null) {
+            feedbackMediaPlayer.setOnCompletionListener(mp -> {
+                mp.release();
+                feedbackMediaPlayer = null;
+            });
+            feedbackMediaPlayer.start();
+        }
+    }
+
     private void cekJawaban(int indeksPilihan) {
         if (countDownTimer != null) countDownTimer.cancel();
         
@@ -237,7 +253,10 @@ public class KuisActivity extends AppCompatActivity {
 
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         
-        if (indeksPilihan == soal.getJawabanBenar()) {
+        boolean isCorrect = (indeksPilihan == soal.getJawabanBenar());
+        playFeedbackSound(isCorrect);
+        
+        if (isCorrect) {
             if (vibrator != null && vibrator.hasVibrator()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     vibrator.vibrate(VibrationEffect.createWaveform(new long[]{0, 50, 50, 50}, -1)); // Getar pendek ganda

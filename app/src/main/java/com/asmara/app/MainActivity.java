@@ -9,6 +9,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.view.animation.OvershootInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -23,9 +27,19 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
+import android.widget.FrameLayout;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.ar.core.ArCoreApk;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
+import java.io.File;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.ar.core.ArCoreApk;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +60,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    // Launcher untuk meminta izin kamera (untuk QR Scanner)
+    private final ActivityResultLauncher<String> requestCameraLauncher =
+        registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                mulaiScanQR();
+            } else {
+                Toast.makeText(this, "Izin kamera diperlukan untuk memindai QR Code.", Toast.LENGTH_LONG).show();
+            }
+        });
+
+    // Launcher untuk hasil scan QR
+    private final ActivityResultLauncher<ScanOptions> qrScanLauncher =
+        registerForActivityResult(new ScanContract(), result -> {
+            if (result.getContents() != null) {
+                prosesHasilScanQR(result.getContents());
+            }
+        });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         cekDukunganAR();
 
         // Navigasi profil lewat header logo
-        findViewById(R.id.iv_header_logo).setOnClickListener(v -> {
+        findViewById(R.id.fl_header_avatar).setOnClickListener(v -> {
             Intent profilIntent = new Intent(MainActivity.this, ProfilActivity.class);
             startActivity(profilIntent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -70,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnNotifToggle.setOnClickListener(v -> {
             animateButton(v);
+
             v.postDelayed(() -> {
                 if (notifAktif) {
                     NotifHelper.batalkanNotifikasi(this);
@@ -96,24 +129,35 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // =====================================================
-        // TOMBOL UTAMA: MASUK DUNIA 3D (dengan animasi berdenyut)
+        // TOMBOL 1: SCAN QR
         // =====================================================
-        MaterialButton btnMulaiAr = findViewById(R.id.btn_mulai_ar);
-        View glowView = findViewById(R.id.glow_dunia3d);
+        FrameLayout btnScanQR = findViewById(R.id.btn_scan_qr);
+        btnScanQR.setOnClickListener(v -> {
+            animateButton(v);
+            v.postDelayed(() -> {
+                // Cek izin kamera sebelum membuka scanner
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    mulaiScanQR();
+                } else {
+                    requestCameraLauncher.launch(Manifest.permission.CAMERA);
+                }
+            }, 150);
+        });
 
-        // Animasi berdenyut terus-menerus pada glow layer
-        mulaiAnimasiGlow(glowView);
-
-        // Animasi "shimmer" teks tombol (berkedip halus)
-        mulaiAnimasiTombol(btnMulaiAr);
-
-        btnMulaiAr.setOnClickListener(v -> {
+        // =====================================================
+        // TOMBOL 2: PETUALANGAN ASMARA (Dunia 3D)
+        // =====================================================
+        FrameLayout btnPetualangan = findViewById(R.id.btn_petualangan);
+        btnPetualangan.setOnClickListener(v -> {
             animateButton(v);
             v.postDelayed(this::tampilkanDialogDunia3D, 150);
         });
 
-        // Tombol Koleksi Sejarah
-        MaterialCardView btnKoleksi = findViewById(R.id.btn_koleksi);
+        // =====================================================
+        // TOMBOL 3: KOLEKSI SEJARAH
+        // =====================================================
+        FrameLayout btnKoleksi = findViewById(R.id.btn_koleksi);
         btnKoleksi.setOnClickListener(v -> {
             animateButton(v);
             v.postDelayed(() -> {
@@ -122,8 +166,10 @@ public class MainActivity extends AppCompatActivity {
             }, 150);
         });
 
-        // Tombol Cara Pakai
-        MaterialCardView btnCaraPakai = findViewById(R.id.btn_cara_pakai);
+        // =====================================================
+        // TOMBOL 4: PANDUAN PENGGUNAAN
+        // =====================================================
+        FrameLayout btnCaraPakai = findViewById(R.id.btn_cara_pakai);
         btnCaraPakai.setOnClickListener(v -> {
             animateButton(v);
             v.postDelayed(() -> {
@@ -132,25 +178,229 @@ public class MainActivity extends AppCompatActivity {
             }, 150);
         });
 
-        // Tombol Uji Pemahaman (Kuis)
-        MaterialCardView btnKuis = findViewById(R.id.btn_kuis);
-        if (btnKuis != null) {
-            btnKuis.setOnClickListener(v -> {
+        // =====================================================
+        // TOMBOL 5: MATERI (Baru)
+        // =====================================================
+        FrameLayout btnMateri = findViewById(R.id.btn_materi);
+        if (btnMateri != null) {
+            btnMateri.setOnClickListener(v -> {
                 animateButton(v);
                 v.postDelayed(() -> {
-                    Intent intent = new Intent(MainActivity.this, KuisActivity.class);
+                    Intent intent = new Intent(MainActivity.this, MateriListActivity.class);
                     startActivity(intent);
                 }, 150);
             });
         }
+
+        // =====================================================
+        // TOMBOL 6: KUIS
+        // =====================================================
+        FrameLayout btnKuis = findViewById(R.id.btn_kuis);
+        if (btnKuis != null) {
+            btnKuis.setOnClickListener(v -> {
+                animateButton(v);
+                v.postDelayed(() -> {
+                    Intent intent = new Intent(MainActivity.this, KuisMasukActivity.class);
+                    startActivity(intent);
+                }, 150);
+            });
+        }
+
+        // ------------------ ANIMASI MASKOT ------------------
+        ImageView ivMaskot = findViewById(R.id.iv_maskot);
+        if (ivMaskot != null) {
+            ivMaskot.setOnClickListener(v -> {
+                Intent intent = new Intent(MainActivity.this, MascotDialogActivity.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            });
+            
+            // Persiapan Animasi Idle (Pulse/Berdenyut)
+            ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(ivMaskot, "scaleX", 1.0f, 1.06f);
+            ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(ivMaskot, "scaleY", 1.0f, 1.06f);
+            scaleDownX.setRepeatCount(ValueAnimator.INFINITE);
+            scaleDownY.setRepeatCount(ValueAnimator.INFINITE);
+            scaleDownX.setRepeatMode(ValueAnimator.REVERSE);
+            scaleDownY.setRepeatMode(ValueAnimator.REVERSE);
+            scaleDownX.setDuration(1000); // 1 detik membesar, 1 detik mengecil
+            scaleDownY.setDuration(1000);
+
+            AnimatorSet pulseSet = new AnimatorSet();
+            pulseSet.playTogether(scaleDownX, scaleDownY);
+
+            // Persiapan Animasi Masuk (Pop-up & Bounce)
+            // Sembunyikan dulu di bawah layar
+            ivMaskot.setTranslationY(300f);
+            ivMaskot.setScaleX(0.5f);
+            ivMaskot.setScaleY(0.5f);
+            ivMaskot.setAlpha(0f);
+
+            // Jalankan animasi masuk
+            ivMaskot.animate()
+                    .translationY(0f)
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .alpha(1f)
+                    .setDuration(800)
+                    .setStartDelay(300) // Tunggu sebentar setelah halaman terbuka
+                    .setInterpolator(new OvershootInterpolator(1.5f))
+                    .withEndAction(() -> {
+                        // Setelah selesai melompat masuk, mulai animasi idle/berdenyut
+                        pulseSet.start();
+                    })
+                    .start();
+        }
+        // ----------------------------------------------------
 
         // Buat channel notifikasi sejak awal (wajib untuk Android 8+)
         NotificationReceiver.createNotificationChannel(this);
     }
 
     /**
+     * Membuka layar pemindai QR Code menggunakan ZXing.
+     */
+    private void mulaiScanQR() {
+        ScanOptions options = new ScanOptions();
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+        options.setPrompt("Arahkan kamera ke QR Code pada smartcard atau miniatur Gedung Papak");
+        options.setCameraId(0);
+        options.setBeepEnabled(true);
+        options.setBarcodeImageEnabled(false);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(CustomScannerActivity.class);
+        qrScanLauncher.launch(options);
+    }
+
+    /**
+     * Memproses hasil scan QR Code dan mengarahkan ke halaman yang sesuai.
+     * Format QR yang didukung:
+     *   - QR_BALOK → Membuka Viewer 3D bentuk Balok
+     *   - QR_KUBUS → Membuka Viewer 3D bentuk Kubus
+     *   - QR_LIMAS → Membuka Viewer 3D bentuk Limas
+     *   - QR_PRISMA → Membuka Viewer 3D bentuk Prisma
+     *   - QR_TABUNG → Membuka Viewer 3D bentuk Tabung
+     *   - QR_PERSEGI_PANJANG → Membuka Viewer 3D bentuk Persegi Panjang
+     *   - QR_GEDUNG → Membuka Viewer 3D Gedung Papak (utuh)
+     */
+    private void prosesHasilScanQR(String hasilScan) {
+        String kode = hasilScan.trim().toUpperCase();
+
+        String tipeBangunRuang = null;
+        String namaBangunRuang = null;
+        String bagianGedung = null;
+
+        switch (kode) {
+            case "QR_BALOK":
+                tipeBangunRuang = "BALOK";
+                namaBangunRuang = "Balok";
+                bagianGedung = "Tiang Gedung Papak";
+                break;
+            case "QR_KUBUS":
+                tipeBangunRuang = "KUBUS";
+                namaBangunRuang = "Kubus";
+                bagianGedung = "Dasar Tiang Gedung Papak";
+                break;
+            case "QR_LIMAS":
+                tipeBangunRuang = "LIMAS";
+                namaBangunRuang = "Limas Segi Empat";
+                bagianGedung = "Atap Gedung Papak";
+                break;
+            case "QR_PRISMA":
+                tipeBangunRuang = "PRISMA";
+                namaBangunRuang = "Prisma Segitiga";
+                bagianGedung = "Atap Samping Gedung Papak";
+                break;
+            case "QR_TABUNG":
+                tipeBangunRuang = "TABUNG";
+                namaBangunRuang = "Tabung";
+                bagianGedung = "Pilar Gedung Papak";
+                break;
+            case "QR_PERSEGI_PANJANG":
+                tipeBangunRuang = "PERSEGI_PANJANG";
+                namaBangunRuang = "Persegi Panjang";
+                bagianGedung = "Jendela Gedung Papak";
+                break;
+            case "QR_GEDUNG":
+                tipeBangunRuang = "GEDUNG";
+                namaBangunRuang = "Gedung Papak";
+                bagianGedung = "Gedung Papak (Utuh)";
+                break;
+            default:
+                // QR tidak dikenali
+                Toast.makeText(this,
+                    "QR Code tidak dikenali: \"" + hasilScan + "\"\nGunakan QR Code dari smartcard ASMARA.",
+                    Toast.LENGTH_LONG).show();
+                return;
+        }
+
+        // Buka Viewer3DActivity dengan data bangun ruang
+        Intent intent = new Intent(this, Viewer3DActivity.class);
+        intent.putExtra("TIPE_BANGUN", tipeBangunRuang);
+        intent.putExtra("NAMA_BANGUN", namaBangunRuang);
+        intent.putExtra("BAGIAN_GEDUNG", bagianGedung);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    /**
      * Mengecek apakah perangkat ini mendukung ARCore.
      */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        perbaruiAvatarHeader();
+    }
+    
+    private void perbaruiAvatarHeader() {
+        TextView tvHeaderAvatar = findViewById(R.id.tv_header_avatar);
+        ShapeableImageView ivHeaderAvatar = findViewById(R.id.iv_header_avatar);
+        FrameLayout flHeaderAvatar = findViewById(R.id.fl_header_avatar);
+        
+        if (tvHeaderAvatar == null || ivHeaderAvatar == null || flHeaderAvatar == null) return;
+        
+        boolean useCustomPhoto = prefs.getBoolean("use_custom_photo", false);
+        int currentAvatar = prefs.getInt("avatar_index", 0);
+        
+        // Update Nama (Ditaruh di atas agar tidak kena return early custom photo)
+        TextView tvHeaderName = findViewById(R.id.tv_header_name);
+        if (tvHeaderName != null) {
+            String namaAnak = prefs.getString("nama_anak", "");
+            if (namaAnak != null && !namaAnak.trim().isEmpty()) {
+                // Gunakan kata pertama saja agar tidak terlalu panjang
+                String namaPanggilan = namaAnak.trim().split(" ")[0];
+                tvHeaderName.setText("Halo, " + namaPanggilan);
+            } else {
+                tvHeaderName.setText("ASMARA");
+            }
+        }
+
+        if (useCustomPhoto) {
+            File f = new File(getFilesDir(), "avatar.jpg");
+            if (f.exists()) {
+                Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+                ivHeaderAvatar.setImageBitmap(bmp);
+                ivHeaderAvatar.setVisibility(View.VISIBLE);
+                tvHeaderAvatar.setVisibility(View.GONE);
+                flHeaderAvatar.setBackgroundResource(R.drawable.circle_white);
+                flHeaderAvatar.setBackgroundTintList(null);
+                return;
+            }
+        }
+        
+        String[] AVATAR_EMOJI = {"🦊", "🐻", "🦁", "🐸", "🦋", "🐬", "🦅", "🐼"};
+        int[] AVATAR_COLORS  = {
+            0xFFFF8F00, 0xFF5D4037, 0xFFEF6C00, 0xFF2E7D32,
+            0xFF7B1FA2, 0xFF0277BD, 0xFF1565C0, 0xFF37474F
+        };
+        
+        ivHeaderAvatar.setVisibility(View.GONE);
+        tvHeaderAvatar.setVisibility(View.VISIBLE);
+        tvHeaderAvatar.setText(AVATAR_EMOJI[currentAvatar]);
+        flHeaderAvatar.setBackgroundResource(R.drawable.circle_white);
+        flHeaderAvatar.setBackgroundTintList(android.content.res.ColorStateList.valueOf(AVATAR_COLORS[currentAvatar]));
+        
+    }
+
     private void cekDukunganAR() {
         try {
             ArCoreApk.Availability availability = ArCoreApk.getInstance().checkAvailability(this);
@@ -177,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Judul
         TextView tvJudul = new TextView(this);
-        tvJudul.setText("🌐 Masuk Dunia 3D");
+        tvJudul.setText("🌐 Petualangan ASMARA");
         tvJudul.setTextSize(22);
         tvJudul.setTextColor(0xFF311B92);
         tvJudul.setTypeface(null, android.graphics.Typeface.BOLD);
@@ -221,7 +471,7 @@ public class MainActivity extends AppCompatActivity {
         // Keterangan Mode AR
         TextView tvKetAR = new TextView(this);
         tvKetAR.setText(arCoreDidukung ? "Letakkan gedung 3D di lantai kamarmu melalui kamera!"
-                : "⚠️ HP kamu belum mendukung fitur kamera AR.");
+                : "⚠️ HP kamu belum mendukung fitur kamera AR.\nGunakan Mode Layar 3D sebagai gantinya.");
         tvKetAR.setTextSize(11);
         tvKetAR.setTextColor(arCoreDidukung ? 0xFF888888 : 0xFFE53935);
         tvKetAR.setGravity(Gravity.CENTER);
@@ -229,10 +479,10 @@ public class MainActivity extends AppCompatActivity {
         containerUtama.addView(tvKetAR);
 
         // =====================
-        // TOMBOL 2: Mode Layar 3D (Virtual)
+        // TOMBOL 2: Mode Layar 3D (Virtual) — KOMPATIBEL SEMUA HP
         // =====================
         MaterialButton btnVirtual = new MaterialButton(this);
-        btnVirtual.setText("🖥️  Mode Layar 3D (Virtual)");
+        btnVirtual.setText("🖥️  Mode Layar 3D (Semua HP)");
         btnVirtual.setTextSize(15);
         btnVirtual.setAllCaps(false);
         btnVirtual.setCornerRadius(40);
@@ -248,7 +498,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Keterangan Mode Virtual
         TextView tvKetVirtual = new TextView(this);
-        tvKetVirtual.setText("Lihat gedung 3D di layar hitam. Putar dengan jari! Semua HP bisa!");
+        tvKetVirtual.setText("Lihat gedung 3D di layar. Putar dengan jari! Semua HP bisa!");
         tvKetVirtual.setTextSize(11);
         tvKetVirtual.setTextColor(0xFF888888);
         tvKetVirtual.setGravity(Gravity.CENTER);
@@ -271,6 +521,9 @@ public class MainActivity extends AppCompatActivity {
         btnVirtual.setOnClickListener(v -> {
             dialog.dismiss();
             Intent intent = new Intent(MainActivity.this, Viewer3DActivity.class);
+            intent.putExtra("TIPE_BANGUN", "GEDUNG");
+            intent.putExtra("NAMA_BANGUN", "Gedung Papak");
+            intent.putExtra("BAGIAN_GEDUNG", "Gedung Papak (Utuh)");
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
@@ -284,46 +537,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         dialog.show();
-    }
-
-    /**
-     * Animasi glow berdenyut terus-menerus di belakang tombol "Masuk Dunia 3D".
-     */
-    private void mulaiAnimasiGlow(View glowView) {
-        AnimationSet animSet = new AnimationSet(true);
-
-        // Skala membesar-mengecil
-        ScaleAnimation scale = new ScaleAnimation(
-            1f, 1.08f, 1f, 1.08f,
-            Animation.RELATIVE_TO_SELF, 0.5f,
-            Animation.RELATIVE_TO_SELF, 0.5f);
-        scale.setDuration(1200);
-        scale.setRepeatCount(Animation.INFINITE);
-        scale.setRepeatMode(Animation.REVERSE);
-
-        // Kedip halus (opacity)
-        AlphaAnimation alpha = new AlphaAnimation(0.4f, 1.0f);
-        alpha.setDuration(1200);
-        alpha.setRepeatCount(Animation.INFINITE);
-        alpha.setRepeatMode(Animation.REVERSE);
-
-        animSet.addAnimation(scale);
-        animSet.addAnimation(alpha);
-        glowView.startAnimation(animSet);
-    }
-
-    /**
-     * Animasi halus pada tombol utama agar terlihat "hidup" dan mengundang klik.
-     */
-    private void mulaiAnimasiTombol(View btn) {
-        ScaleAnimation pulse = new ScaleAnimation(
-            1f, 1.03f, 1f, 1.03f,
-            Animation.RELATIVE_TO_SELF, 0.5f,
-            Animation.RELATIVE_TO_SELF, 0.5f);
-        pulse.setDuration(800);
-        pulse.setRepeatCount(Animation.INFINITE);
-        pulse.setRepeatMode(Animation.REVERSE);
-        btn.startAnimation(pulse);
     }
 
     private void aktifkanNotifikasi() {
@@ -359,4 +572,3 @@ public class MainActivity extends AppCompatActivity {
         view.startAnimation(scale);
     }
 }
-

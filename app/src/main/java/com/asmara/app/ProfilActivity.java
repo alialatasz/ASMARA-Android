@@ -11,11 +11,22 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
+import android.widget.FrameLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+import java.io.InputStream;
+import java.io.FileOutputStream;
+import java.io.File;
+import java.io.IOException;
+import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
+import android.content.Intent;
+import android.net.Uri;
+import android.view.View;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import com.google.android.material.imageview.ShapeableImageView;
 import java.util.Objects;
-
 public class ProfilActivity extends AppCompatActivity {
 
     // Data avatar: emoji + warna latar
@@ -32,6 +43,8 @@ public class ProfilActivity extends AppCompatActivity {
     private TextInputEditText etNama;
     private android.widget.ProgressBar pbXp;
     private TextView tvLevelName, tvXpText, tvDisplayNama;
+    private ShapeableImageView ivAvatarPhoto;
+    private ActivityResultLauncher<Intent> photoPickerLauncher;
 
     // Helper statis untuk menyimpan dan membaca data profil
     public static void simpanHasilKuis(Context ctx, int skor, int benar) {
@@ -69,6 +82,38 @@ public class ProfilActivity extends AppCompatActivity {
         tvLevelName= findViewById(R.id.tv_level_name);
         tvXpText   = findViewById(R.id.tv_xp_text);
         tvDisplayNama = findViewById(R.id.tv_display_nama);
+        ivAvatarPhoto = findViewById(R.id.iv_avatar_photo);
+
+        photoPickerLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    Uri selectedImageUri = result.getData().getData();
+                    if (selectedImageUri != null) {
+                        try {
+                            InputStream is = getContentResolver().openInputStream(selectedImageUri);
+                            File f = new File(getFilesDir(), "avatar.jpg");
+                            FileOutputStream fos = new FileOutputStream(f);
+                            byte[] buffer = new byte[1024];
+                            int length;
+                            while ((length = is.read(buffer)) > 0) {
+                                fos.write(buffer, 0, length);
+                            }
+                            fos.close();
+                            is.close();
+                            
+                            prefs.edit().putBoolean("use_custom_photo", true).apply();
+                            perbaruiAvatar();
+                            
+                            Toast.makeText(this, "Foto profil berhasil diubah!", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            Toast.makeText(this, "Gagal memuat foto", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        );
 
         // Cek Bonus Login Harian (+50 XP)
         cekBonusHarian();
@@ -158,27 +203,52 @@ public class ProfilActivity extends AppCompatActivity {
             "Kupu-kupu Indah", "Lumba-lumba Ramah", "Elang Gagah", "Panda Gemas"
         };
         
-        String[] items = new String[AVATAR_EMOJI.length];
+        String[] items = new String[AVATAR_EMOJI.length + 1];
+        items[0] = "📸 Pilih dari Galeri HP";
         for (int i = 0; i < AVATAR_EMOJI.length; i++) {
-            items[i] = AVATAR_EMOJI[i] + "  " + AVATAR_NAMES[i];
+            items[i + 1] = AVATAR_EMOJI[i] + "  " + AVATAR_NAMES[i];
         }
+        
         new AlertDialog.Builder(this)
             .setTitle("Pilih Avatarmu!")
             .setItems(items, (dialog, which) -> {
-                currentAvatar = which;
-                prefs.edit().putInt("avatar_index", currentAvatar).apply();
-                perbaruiAvatar();
+                if (which == 0) {
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    photoPickerLauncher.launch(intent);
+                } else {
+                    currentAvatar = which - 1;
+                    prefs.edit()
+                        .putInt("avatar_index", currentAvatar)
+                        .putBoolean("use_custom_photo", false)
+                        .apply();
+                    perbaruiAvatar();
+                    FirebaseManager.backupDataProfil(ProfilActivity.this);
+                }
             })
             .show();
     }
 
     private void perbaruiAvatar() {
+        boolean useCustomPhoto = prefs.getBoolean("use_custom_photo", false);
+        if (useCustomPhoto) {
+            File f = new File(getFilesDir(), "avatar.jpg");
+            if (f.exists()) {
+                Bitmap bmp = BitmapFactory.decodeFile(f.getAbsolutePath());
+                ivAvatarPhoto.setImageBitmap(bmp);
+                ivAvatarPhoto.setVisibility(View.VISIBLE);
+                tvAvatar.setVisibility(View.GONE);
+                flAvatar.setBackgroundResource(R.drawable.circle_white);
+                flAvatar.setBackgroundTintList(null);
+                return;
+            }
+        }
+        
+        ivAvatarPhoto.setVisibility(View.GONE);
+        tvAvatar.setVisibility(View.VISIBLE);
         tvAvatar.setText(AVATAR_EMOJI[currentAvatar]);
-        flAvatar.setBackgroundColor(AVATAR_COLORS[currentAvatar]);
-        // Pastikan sudut tetap bulat setelah ganti warna
-        flAvatar.setBackground(null);
         flAvatar.setBackgroundResource(R.drawable.circle_white);
-        tvAvatar.setText(AVATAR_EMOJI[currentAvatar]);
+        flAvatar.setBackgroundTintList(android.content.res.ColorStateList.valueOf(AVATAR_COLORS[currentAvatar]));
     }
 
     private void cekBonusHarian() {
@@ -212,29 +282,35 @@ public class ProfilActivity extends AppCompatActivity {
         int xp = prefs.getInt("total_xp", 0);
         
         // Kalkulasi Level
-        String namaLevel = "🌱 Penjelajah Pemula";
+        String namaLevel = "Penjelajah Pemula";
+        int iconResId = R.drawable.ic_level_pemula;
         int xpDasar = 0;
         int xpMax = 100;
 
         if (xp >= 1000) {
-            namaLevel = "👑 Maestro Sejarah";
+            namaLevel = "Maestro Sejarah";
+            iconResId = R.drawable.ic_level_maestro;
             xpDasar = 1000;
             xpMax = xp; // Maxed out
         } else if (xp >= 600) {
-            namaLevel = "📜 Pakar Sejarah";
+            namaLevel = "Pakar Sejarah";
+            iconResId = R.drawable.ic_level_pakar;
             xpDasar = 600;
             xpMax = 1000;
         } else if (xp >= 300) {
-            namaLevel = "🧭 Arkeolog Muda";
+            namaLevel = "Arkeolog Muda";
+            iconResId = R.drawable.ic_level_arkeolog;
             xpDasar = 300;
             xpMax = 600;
         } else if (xp >= 100) {
-            namaLevel = "🔍 Pengamat Cilik";
+            namaLevel = "Pengamat Cilik";
+            iconResId = R.drawable.ic_level_pengamat;
             xpDasar = 100;
             xpMax = 300;
         }
 
         tvLevelName.setText(namaLevel);
+        tvLevelName.setCompoundDrawablesWithIntrinsicBounds(iconResId, 0, 0, 0);
         
         if (xp >= 1000) {
             pbXp.setMax(100);
@@ -266,16 +342,16 @@ public class ProfilActivity extends AppCompatActivity {
      * Jika belum: card menjadi abu-abu dan emoji tersamarkan.
      */
     private void setBadgeState(int cardId, boolean unlocked) {
-        MaterialCardView card = findViewById(cardId);
+        FrameLayout card = findViewById(cardId);
         if (card == null) return;
         if (unlocked) {
-            card.setCardBackgroundColor(0xFFFFFFFF);
+            card.setBackgroundResource(R.drawable.bg_composite_16_white);
             card.setAlpha(1.0f);
-            card.setCardElevation(6f);
+            card.setElevation(0f);
         } else {
-            card.setCardBackgroundColor(0xFFF0F0F0);
+            card.setBackgroundResource(R.drawable.bg_composite_16_gray);
             card.setAlpha(0.45f);
-            card.setCardElevation(0f);
+            card.setElevation(0f);
         }
     }
 }

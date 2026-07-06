@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Color Palette ASMARA (Synced with Web Prototype) -->
-    <color name="primary">#89CFF0</color>
-    <color name="primary_dark">#5BB4DF</color>
-    <color name="primary_light">#B3E5FC</color>
-    <color name="accent_orange">#E85D04</color>
-    <color name="accent_yellow">#F4A822</color>
+    <!-- Color Palette ASMARA (Fun Edition) -->
+    <color name="primary">#0077B6</color>         <!-- Fun Light Blue -->
+    <color name="primary_dark">#005F92</color>
+    <color name="primary_light">#3392C5</color>
+    
+    <!-- ASMARA Core Colors -->
+    <color name="asmara_blue">#0077B6</color>
+    <color name="asmara_red">#C1121F</color>      <!-- Fun Red -->
+    <color name="asmara_yellow">#FFC300</color>   <!-- Fun Yellow -->
+    
+    <color name="accent_orange">#FF7043</color>
+    <color name="accent_yellow">#FFC300</color>
+    
     <color name="white">#FFFFFF</color>
     <color name="off_white">#F5F7FA</color>
     <color name="text_dark">#1A1A2E</color>
     <color name="text_medium">#4A4A6A</color>
     <color name="text_light">#8888AA</color>
-    <color name="success">#2ECC71</color>
-    <color name="danger">#E74C3C</color>
+    <color name="success">#4CAF50</color>
+    <color name="danger">#C1121F</color>
     
     <!-- Specific Components -->
     <color name="card_bg">#FFFFFF</color>
@@ -20,8 +27,8 @@
     <color name="scan_frame">#FFFFFFFF</color>
     <color name="camera_bg">#1A1A2E</color>
     <color name="panel_bg">#F8F9FF</color>
-    <color name="audio_btn">#89CFF0</color>
-    <color name="gradient_start">#89CFF0</color>
-    <color name="gradient_end">#5BB4DF</color>
-    <color name="ar_button">#E85D04</color>
+    <color name="audio_btn">#29B6F6</color>
+    <color name="gradient_start">#0077B6</color>
+    <color name="gradient_end">#005F92</color>
+    <color name="ar_button">#C1121F</color>
 </resources>

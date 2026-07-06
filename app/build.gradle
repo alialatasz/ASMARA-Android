@@ -15,12 +15,20 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // Mengubah nama default APK saat di-build
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "ASMARA.apk"
         }
     }
     compileOptions {
@@ -40,6 +48,9 @@ dependencies {
     // Firebase
     implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-database'
+    
+    // QR Code Scanner
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit

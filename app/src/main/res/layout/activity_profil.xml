@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_watermark"
+    android:background="@drawable/bg_pattern_tiled"
     android:clipChildren="false"
     android:clipToPadding="false"
     android:fillViewport="true">
@@ -16,13 +16,20 @@
         android:clipToPadding="false"
         android:orientation="vertical">
 
-        <!-- Header Gradient -->
+        <!-- Header Container -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:background="@drawable/bg_welcome_gradient"
+            android:layout_height="wrap_content"
             android:clipChildren="false"
             android:clipToPadding="false">
+
+            <!-- Background Gradient -->
+            <View
+                android:id="@+id/bg_header"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="@drawable/bg_welcome_gradient"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Tombol Kembali -->
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -62,6 +69,7 @@
                 android:textColor="@color/white"
                 android:textSize="28sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/lexend"
                 app:layout_constraintBottom_toTopOf="@id/fl_avatar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -74,10 +82,10 @@
                 android:layout_height="110dp"
                 android:background="@drawable/circle_white"
                 android:elevation="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bg_header"
+                app:layout_constraintBottom_toBottomOf="@id/bg_header"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="-40dp">
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <TextView
                     android:id="@+id/tv_avatar"
@@ -86,6 +94,14 @@
                     android:text="🦊"
                     android:textSize="52sp"
                     android:gravity="center"/>
+                    
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_avatar_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Corner.Size50Percent" />
             </FrameLayout>
 
             <!-- Tombol Ganti Avatar -->
@@ -97,26 +113,28 @@
                 android:contentDescription="Ganti Avatar"
                 app:backgroundTint="@color/accent_orange"
                 app:tint="@color/white"
-                app:fabSize="mini"
+                app:fabSize="normal"
                 app:elevation="6dp"
-                android:layout_marginBottom="-30dp"
-                android:layout_marginStart="130dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/fl_avatar"
+                app:layout_constraintBottom_toBottomOf="@id/fl_avatar"
+                app:layout_constraintStart_toEndOf="@id/fl_avatar"
+                app:layout_constraintEnd_toEndOf="@id/fl_avatar"
+                app:layout_constraintVertical_bias="0.9"
+                app:layout_constraintHorizontal_bias="0.3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Card: Nama Anak -->
-        <com.google.android.material.card.MaterialCardView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="6dp"
-            app:cardBackgroundColor="@color/white">
+            android:background="@drawable/bg_composite_20_white"
+        android:clipToOutline="true"
+            android:elevation="0dp"
+        >
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,6 +149,7 @@
                     android:text="Ubah Nama Panggilan"
                     android:textColor="@color/text_light"
                     android:textSize="12sp"
+                    android:fontFamily="@font/lexend"
                     android:layout_marginBottom="8dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -151,6 +170,7 @@
                         android:hint="Masukkan namamu..."
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/lexend"
                         android:gravity="center"
                         android:inputType="textPersonName"
                         android:imeOptions="actionDone"/>
@@ -160,13 +180,17 @@
                     android:id="@+id/btn_simpan_nama"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:text="💾 Simpan Nama"
+                    android:text="Simpan Nama"
                     android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/lexend"
                     android:layout_marginTop="12dp"
                     app:backgroundTint="@color/primary"
-                    app:cornerRadius="25dp"/>
+                    app:cornerRadius="8dp"
+                    app:icon="@drawable/ic_save_icon"
+                    app:iconTint="@color/white"
+                    app:iconGravity="textStart"/>
 
                 <!-- Divider -->
                 <View
@@ -181,9 +205,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="🌱 Penjelajah Pemula"
-                    android:textColor="@color/primary_dark"
+                    android:textColor="@color/primary_light"
                     android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:drawablePadding="8dp"
+                    android:drawableTint="@color/primary_light"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -213,18 +239,21 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </FrameLayout>
 
         <!-- Section: Statistik -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📊 Statistik Belajarku"
-            android:textColor="@color/primary_dark"
+            android:text="Statistik Belajarku"
+            android:textColor="@color/primary_light"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:drawableStart="@drawable/ic_statistik_belajar"
+            android:drawableTint="@color/primary_light"
+            android:drawablePadding="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -235,14 +264,15 @@
             android:weightSum="3">
 
             <!-- Stat 1: Total Bintang -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#FFF8E1">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -274,17 +304,18 @@
                         android:textColor="@color/text_light"
                         android:gravity="center"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Stat 2: Kuis Selesai -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="3dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#E8F5E9">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -316,17 +347,18 @@
                         android:textColor="@color/text_light"
                         android:gravity="center"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Stat 3: Skor Terbaik -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="#E3F2FD">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -358,7 +390,7 @@
                         android:textColor="@color/text_light"
                         android:gravity="center"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -366,12 +398,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🏅 Koleksi Lencana"
-            android:textColor="@color/primary_dark"
+            android:text="Koleksi Lencana"
+            android:textColor="@color/primary_light"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:drawableStart="@drawable/ic_koleksi_lencana"
+            android:drawableTint="@color/primary_light"
+            android:drawablePadding="8dp"/>
 
         <!-- Grid Lencana (2x2) -->
         <LinearLayout
@@ -383,14 +418,16 @@
             android:weightSum="2">
 
             <!-- Badge 1 -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:id="@+id/badge_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -409,7 +446,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/white"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge1_desc"
                         android:layout_width="wrap_content"
@@ -420,17 +457,19 @@
                         android:textColor="@color/text_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Badge 2 -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:id="@+id/badge_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -449,7 +488,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/white"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge2_desc"
                         android:layout_width="wrap_content"
@@ -460,7 +499,7 @@
                         android:textColor="@color/text_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -473,14 +512,16 @@
             android:weightSum="2">
 
             <!-- Badge 3 -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:id="@+id/badge_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -499,7 +540,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/white"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge3_desc"
                         android:layout_width="wrap_content"
@@ -510,17 +551,19 @@
                         android:textColor="@color/text_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
             <!-- Badge 4 -->
-            <com.google.android.material.card.MaterialCardView
+            <FrameLayout
                 android:id="@+id/badge_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp">
+                android:background="@drawable/bg_composite_16_white"
+        android:clipToOutline="true"
+                android:elevation="0dp"
+        >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -539,7 +582,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/primary_dark"
+                        android:textColor="@color/white"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge4_desc"
                         android:layout_width="wrap_content"
@@ -550,7 +593,7 @@
                         android:textColor="@color/text_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            </FrameLayout>
 
         </LinearLayout>
 

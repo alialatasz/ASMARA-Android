@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.ASMARA" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ASMARA" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -9,25 +9,29 @@
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:windowBackground">@color/off_white</item>
+        <item name="android:fontFamily">@font/lexend</item>
+        <item name="fontFamily">@font/lexend</item>
     </style>
 
-    <style name="Theme.ASMARA.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ASMARA.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:windowBackground">@color/primary_dark</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="Theme.ASMARA.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ASMARA.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:statusBarColor">@color/primary_dark</item>
     </style>
 
-    <style name="Theme.ASMARA.Camera" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ASMARA.Camera" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/camera_bg</item>
         <item name="android:windowBackground">@color/camera_bg</item>
     </style>
+
+
 
     <!-- Button Styles -->
     <style name="Button.ASMARA.AR" parent="Widget.MaterialComponents.Button">
@@ -60,5 +64,10 @@
 
     <style name="Text.ASMARA.Subtitle" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="android:textColor">@color/text_medium</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.Corner.Size50Percent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 </resources>

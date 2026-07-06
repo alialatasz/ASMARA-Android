@@ -8,4 +8,12 @@
     <string name="scan_instruction">Arahkan kamera ke kartu bergambar</string>
     <string name="gedung_papak_title">Gedung Papak Salatiga</string>
     <string name="gedung_papak_desc">Gedung Papak adalah bangunan bersejarah di Salatiga yang dibangun pada masa kolonial Belanda sekitar abad ke-19. Bangunan ini memiliki arsitektur khas Eropa dengan atap datar yang menjadi ciri khasnya. Kini Gedung Papak menjadi salah satu ikon budaya dan warisan sejarah Kota Salatiga yang dilindungi.</string>
+    
+    <!-- Kuis Masuk Strings -->
+    <string name="kuis_asmara_title">Kuis ASMARA</string>
+    <string name="kuis_masuk_title">Siap Uji Pemahamanmu?</string>
+    <string name="kuis_masuk_desc">Isi data dirimu terlebih dahulu sebelum memulai kuis ya!</string>
+    <string name="nama_lengkap_hint">Nama Lengkap</string>
+    <string name="kelas_hint">Kelas (Misal: 5A)</string>
+    <string name="mulai_kuis_btn">MULAI KUIS!</string>
 </resources>

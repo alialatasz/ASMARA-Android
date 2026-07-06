@@ -77,7 +77,7 @@ public class EdukasiActivity extends AppCompatActivity {
         com.google.android.material.button.MaterialButton btnKuis = findViewById(R.id.btn_lanjut_kuis);
         btnKuis.setOnClickListener(v -> {
             stopAudio();
-            Intent intent = new Intent(EdukasiActivity.this, KuisActivity.class);
+            Intent intent = new Intent(EdukasiActivity.this, KuisMasukActivity.class);
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
