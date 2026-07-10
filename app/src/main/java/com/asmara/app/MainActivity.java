@@ -321,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
                 bagianGedung = "Jendela Gedung Papak";
                 break;
             case "QR_GEDUNG":
+            case "ASMARA_GEDUNG_PAPAK_AR":
                 tipeBangunRuang = "GEDUNG";
                 namaBangunRuang = "Gedung Papak";
                 bagianGedung = "Gedung Papak (Utuh)";
@@ -333,8 +334,8 @@ public class MainActivity extends AppCompatActivity {
                 return;
         }
 
-        // Buka Viewer3DActivity dengan data bangun ruang
-        Intent intent = new Intent(this, Viewer3DActivity.class);
+        // Buka MateriARActivity dengan data bangun ruang (fitur AR baru)
+        Intent intent = new Intent(this, MateriARActivity.class);
         intent.putExtra("TIPE_BANGUN", tipeBangunRuang);
         intent.putExtra("NAMA_BANGUN", namaBangunRuang);
         intent.putExtra("BAGIAN_GEDUNG", bagianGedung);
@@ -513,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
         // Set aksi tombol
         btnAR.setOnClickListener(v -> {
             dialog.dismiss();
-            Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+            Intent intent = new Intent(MainActivity.this, MateriARActivity.class);
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });

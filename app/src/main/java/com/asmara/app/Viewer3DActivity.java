@@ -122,7 +122,7 @@ public class Viewer3DActivity extends AppCompatActivity {
                     tvInfo.setText(namaBangun + " berhasil dimuat!\n✨ Geser 1 jari untuk memutar\n✨ Cubit 2 jari untuk memperbesar");
                 })
                 .exceptionally(throwable -> {
-                    tvInfo.setText("⚠️ Model 3D \"" + namaFileModel + "\" belum tersedia.\nFile .glb perlu ditambahkan ke folder assets.");
+                    tvInfo.setText("⚠️ Model 3D \"" + namaFileModel + "\" belum tersedia.\nFile .glb/.gltf perlu ditambahkan ke folder assets.");
                     return null;
                 });
     }

@@ -65,7 +65,7 @@
                         android:text="ASMARA"
                         android:textColor="@color/primary_dark"
                         android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/lexend"
                         android:letterSpacing="0.05"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
                     android:layout_marginBottom="12dp">
 
                     <!-- Tombol 1: Petualangan ASMARA -->
-                    <FrameLayout
+                    <com.asmara.app.BlurGlassView
                         android:id="@+id/btn_petualangan"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
@@ -161,9 +161,10 @@
                         android:layout_marginEnd="6dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="@drawable/bg_glass_24_blue"
-                        android:clipToOutline="true"
-                        android:elevation="8dp">
+                        app:glassColor="#CFECF3"
+                        app:glassCornerRadius="24dp"
+                        app:blurRadius="20"
+                        app:glassAlpha="0.55">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -187,10 +188,10 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"/>
                         </LinearLayout>
-                    </FrameLayout>
+                    </com.asmara.app.BlurGlassView>
 
                     <!-- Tombol 2: Materi -->
-                    <FrameLayout
+                    <com.asmara.app.BlurGlassView
                         android:id="@+id/btn_materi"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
@@ -198,9 +199,10 @@
                         android:layout_marginStart="6dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="@drawable/bg_glass_24_yellow"
-                        android:clipToOutline="true"
-                        android:elevation="8dp">
+                        app:glassColor="#F7E49B"
+                        app:glassCornerRadius="24dp"
+                        app:blurRadius="20"
+                        app:glassAlpha="0.55">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -224,7 +226,7 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"/>
                         </LinearLayout>
-                    </FrameLayout>
+                    </com.asmara.app.BlurGlassView>
 
                 </LinearLayout>
 
@@ -237,7 +239,7 @@
                     android:layout_marginBottom="12dp">
 
                     <!-- Tombol 3: Scan QR -->
-                    <FrameLayout
+                    <com.asmara.app.BlurGlassView
                         android:id="@+id/btn_scan_qr"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
@@ -245,9 +247,10 @@
                         android:layout_marginEnd="6dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="@drawable/bg_glass_24_red"
-                        android:clipToOutline="true"
-                        android:elevation="8dp">
+                        app:glassColor="#FDACAC"
+                        app:glassCornerRadius="24dp"
+                        app:blurRadius="20"
+                        app:glassAlpha="0.55">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -271,10 +274,10 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"/>
                         </LinearLayout>
-                    </FrameLayout>
+                    </com.asmara.app.BlurGlassView>
 
                     <!-- Tombol 4: Kuis -->
-                    <FrameLayout
+                    <com.asmara.app.BlurGlassView
                         android:id="@+id/btn_kuis"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
@@ -282,9 +285,10 @@
                         android:layout_marginStart="6dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="@drawable/bg_glass_24_blue"
-                        android:clipToOutline="true"
-                        android:elevation="8dp">
+                        app:glassColor="#CFECF3"
+                        app:glassCornerRadius="24dp"
+                        app:blurRadius="20"
+                        app:glassAlpha="0.55">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -308,7 +312,7 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"/>
                         </LinearLayout>
-                    </FrameLayout>
+                    </com.asmara.app.BlurGlassView>
 
                 </LinearLayout>
 
@@ -321,7 +325,7 @@
                     android:layout_marginBottom="16dp">
 
                     <!-- Tombol 5: Koleksi Sejarah -->
-                    <FrameLayout
+                    <com.asmara.app.BlurGlassView
                         android:id="@+id/btn_koleksi"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
@@ -329,9 +333,10 @@
                         android:layout_marginEnd="6dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="@drawable/bg_glass_24_yellow"
-                        android:clipToOutline="true"
-                        android:elevation="8dp">
+                        app:glassColor="#F7E49B"
+                        app:glassCornerRadius="24dp"
+                        app:blurRadius="20"
+                        app:glassAlpha="0.55">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -355,10 +360,10 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"/>
                         </LinearLayout>
-                    </FrameLayout>
+                    </com.asmara.app.BlurGlassView>
 
                     <!-- Tombol 6: Panduan Penggunaan -->
-                    <FrameLayout
+                    <com.asmara.app.BlurGlassView
                         android:id="@+id/btn_cara_pakai"
                         android:layout_width="0dp"
                         android:layout_height="140dp"
@@ -366,9 +371,10 @@
                         android:layout_marginStart="6dp"
                         android:clickable="true"
                         android:focusable="true"
-                        android:background="@drawable/bg_glass_24_red"
-                        android:clipToOutline="true"
-                        android:elevation="8dp">
+                        app:glassColor="#FDACAC"
+                        app:glassCornerRadius="24dp"
+                        app:blurRadius="20"
+                        app:glassAlpha="0.55">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -392,7 +398,7 @@
                                 android:layout_marginTop="10dp"
                                 android:gravity="center"/>
                         </LinearLayout>
-                    </FrameLayout>
+                    </com.asmara.app.BlurGlassView>
 
                 </LinearLayout>
 

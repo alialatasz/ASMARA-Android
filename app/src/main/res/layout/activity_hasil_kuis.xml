@@ -9,7 +9,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
     android:background="@drawable/bg_pattern_tiled">
 
         <LinearLayout
@@ -29,13 +28,14 @@
                 android:layout_marginBottom="24dp"
                 android:letterSpacing="0.05"/>
 
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/bg_glass_24_yellow"
-                android:clipToOutline="true"
-                android:elevation="8dp">
+                app:glassColor="#F7E49B"
+                app:glassCornerRadius="24dp"
+                app:blurRadius="20"
+                app:glassAlpha="0.55">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -135,7 +135,7 @@
                             android:textStyle="bold"/>
                     </LinearLayout>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_ulangi_kuis"
