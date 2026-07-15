@@ -73,21 +73,36 @@
                             android:id="@+id/star1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="⭐"
+                            android:text="★"
+                            android:textColor="@color/white"
+                            android:shadowColor="#33000000"
+                            android:shadowDx="0"
+                            android:shadowDy="4"
+                            android:shadowRadius="4"
                             android:textSize="32sp"
                             android:layout_marginHorizontal="4dp"/>
                         <TextView
                             android:id="@+id/star2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="⭐"
-                            android:textSize="40sp"
+                            android:text="★"
+                            android:textColor="@color/white"
+                            android:shadowColor="#33000000"
+                            android:shadowDx="0"
+                            android:shadowDy="4"
+                            android:shadowRadius="4"
+                            android:textSize="60sp"
                             android:layout_marginHorizontal="4dp"/>
                         <TextView
                             android:id="@+id/star3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="⭐"
+                            android:text="★"
+                            android:textColor="@color/white"
+                            android:shadowColor="#33000000"
+                            android:shadowDx="0"
+                            android:shadowDy="4"
+                            android:shadowRadius="4"
                             android:textSize="32sp"
                             android:layout_marginHorizontal="4dp"/>
                     </LinearLayout>
@@ -96,7 +111,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Skor Kamu"
-                        android:textColor="@color/text_medium"
+                        android:textColor="@color/accent_orange"
                         android:textSize="14sp"/>
 
                     <TextView
@@ -104,7 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="100"
-                        android:textColor="@color/white"
+                        android:textColor="@color/accent_orange"
                         android:textSize="48sp"
                         android:textStyle="bold"/>
 
@@ -137,30 +152,42 @@
                 </LinearLayout>
             </com.asmara.app.BlurGlassView>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/btn_ulangi_kuis"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:text="ULANGI KUIS"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@drawable/bg_glass_24_green"
-                android:elevation="8dp"
-                android:stateListAnimator="@null"
-                android:layout_marginBottom="16dp"/>
+                app:glassColor="#6FCF97"
+                app:glassCornerRadius="32dp"
+                android:layout_marginBottom="16dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="ULANGI KUIS"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:gravity="center" />
+            </com.asmara.app.BlurGlassView>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/btn_kembali_home"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:text="KEMBALI KE BERANDA"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@drawable/bg_glass_24_blue"
-                android:elevation="8dp"
-                android:stateListAnimator="@null"/>
+                app:glassColor="#56CCF2"
+                app:glassCornerRadius="32dp"
+                android:clickable="true"
+                android:focusable="true">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="KEMBALI KE BERANDA"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:gravity="center" />
+            </com.asmara.app.BlurGlassView>
 
         </LinearLayout>
     </ScrollView>

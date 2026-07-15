@@ -402,6 +402,45 @@
 
                 </LinearLayout>
 
+                <!-- Baris 4: Papan Peringkat -->
+                <com.asmara.app.BlurGlassView
+                    android:id="@+id/btn_leaderboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:glassColor="#CFECF3"
+                    app:glassCornerRadius="24dp"
+                    app:blurRadius="20"
+                    app:glassAlpha="0.55">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="8dp">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:layout_marginEnd="88dp"
+                            android:scaleX="3.9"
+                            android:scaleY="3.9"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_peringkat"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="64dp"
+                            android:scaleX="2.8"
+                            android:scaleY="2.8"
+                            android:scaleType="fitCenter"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/text_peringkat"/>
+                    </LinearLayout>
+                </com.asmara.app.BlurGlassView>
 
             </LinearLayout>
         </LinearLayout>

@@ -66,6 +66,21 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Tombol Screenshot -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_screenshot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_bar_viewer"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_camera"
+        app:backgroundTint="@color/accent_orange"
+        app:tint="@color/white"
+        android:elevation="12dp"
+        app:fabSize="normal"/>
+
     <!-- Bubble petunjuk di bawah -->
     <LinearLayout
         android:id="@+id/bottom_bar_viewer"
@@ -80,7 +95,7 @@
             android:id="@+id/tv_info_viewer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="✨ Sentuh dan geser untuk memutar gedung. Cubit untuk memperbesar!"
+            android:text="Sentuh dan geser untuk memutar gedung. Cubit untuk memperbesar!"
             android:textColor="#333333"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -93,7 +108,9 @@
             android:id="@+id/btn_edukasi_viewer"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="📖  Baca Info Sejarah"
+            android:text="Baca Info Sejarah"
+            app:drawableStartCompat="@drawable/ic_book_outline"
+            android:drawablePadding="12dp"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/white"

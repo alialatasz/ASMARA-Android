@@ -47,7 +47,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📷  Cara Scan QR Code"
+                android:text="Cara Scan QR Code"
+                app:drawableStartCompat="@drawable/ic_camera"
+                android:drawablePadding="12dp"
                 android:textColor="@color/primary_light"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -171,7 +173,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🖥️  Cara Melihat Objek 3D"
+                android:text="Cara Melihat Objek 3D"
+                app:drawableStartCompat="@drawable/ic_cube"
+                android:drawablePadding="12dp"
                 android:textColor="@color/primary_light"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -240,7 +244,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📖  Cara Membuka Materi"
+                android:text="Cara Membuka Materi"
+                app:drawableStartCompat="@drawable/ic_book_outline"
+                android:drawablePadding="12dp"
                 android:textColor="@color/primary_light"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -275,7 +281,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="🧠  Cara Mengerjakan Kuis"
+                android:text="Cara Mengerjakan Kuis"
+                app:drawableStartCompat="@drawable/ic_quiz"
+                android:drawablePadding="12dp"
                 android:textColor="@color/primary_light"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -303,6 +311,53 @@
                         android:textColor="@color/text_dark"
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </FrameLayout>
+            <!-- ========== DOWNLOAD SMARTCARD ========== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Download Kartu Pintar (Smartcard)"
+                app:drawableStartCompat="@drawable/ic_save_icon"
+                android:drawablePadding="12dp"
+                android:textColor="@color/primary_light"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/bg_composite_16_white"
+                android:clipToOutline="true"
+                android:elevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Kehilangan buku atau kartu AR fisikmu? Jangan khawatir, kamu bisa mendownload versi PDF-nya di sini lalu mencetaknya sendiri di rumah!"
+                        android:textColor="@color/text_dark"
+                        android:textSize="14sp"
+                        android:textAlignment="center"
+                        android:layout_marginBottom="16dp"/>
+                        
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_download_smartcard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Download PDF"
+                        app:icon="@drawable/ic_book_outline"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="12dp"
+                        app:cornerRadius="12dp"/>
                 </LinearLayout>
             </FrameLayout>
 

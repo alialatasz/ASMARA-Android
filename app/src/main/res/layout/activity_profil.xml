@@ -203,7 +203,7 @@
                     android:id="@+id/tv_level_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🌱 Penjelajah Pemula"
+                    android:text="Penjelajah Pemula"
                     android:textColor="@color/primary_light"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -280,11 +280,11 @@
                     android:padding="14dp"
                     android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="⭐"
-                        android:textSize="28sp"/>
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_star_icon"
+                        android:layout_marginBottom="4dp"/>
 
                     <TextView
                         android:id="@+id/tv_total_bintang"
@@ -323,11 +323,11 @@
                     android:padding="14dp"
                     android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📝"
-                        android:textSize="28sp"/>
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_quiz"
+                        android:layout_marginBottom="4dp"/>
 
                     <TextView
                         android:id="@+id/tv_kuis_selesai"
@@ -366,11 +366,11 @@
                     android:padding="14dp"
                     android:gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🏆"
-                        android:textSize="28sp"/>
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_trophy"
+                        android:layout_marginBottom="4dp"/>
 
                     <TextView
                         android:id="@+id/tv_skor_terbaik"
@@ -433,11 +433,10 @@
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center">
-                    <TextView android:id="@+id/tv_badge1_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🗺️"
-                        android:textSize="36sp"/>
+                    <ImageView android:id="@+id/tv_badge1_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_globe"/>
                     <TextView android:id="@+id/tv_badge1_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -475,11 +474,10 @@
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center">
-                    <TextView android:id="@+id/tv_badge2_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🏆"
-                        android:textSize="36sp"/>
+                    <ImageView android:id="@+id/tv_badge2_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_trophy"/>
                     <TextView android:id="@+id/tv_badge2_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -527,11 +525,10 @@
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center">
-                    <TextView android:id="@+id/tv_badge3_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📚"
-                        android:textSize="36sp"/>
+                    <ImageView android:id="@+id/tv_badge3_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_book_outline"/>
                     <TextView android:id="@+id/tv_badge3_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -569,11 +566,10 @@
                     android:orientation="vertical"
                     android:padding="16dp"
                     android:gravity="center">
-                    <TextView android:id="@+id/tv_badge4_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🎓"
-                        android:textSize="36sp"/>
+                    <ImageView android:id="@+id/tv_badge4_icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_star_icon"/>
                     <TextView android:id="@+id/tv_badge4_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -604,7 +600,10 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="32dp"
-            android:text="🔄 Reset Semua Progress"
+            android:text="Reset Semua Progress"
+            app:icon="@drawable/ic_close"
+            app:iconGravity="textStart"
+            app:iconTint="@color/danger"
             android:textColor="@color/danger"
             android:textSize="13sp"
             app:backgroundTint="#FFF0F0"
