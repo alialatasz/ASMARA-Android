@@ -13,9 +13,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.view.animation.OvershootInterpolator;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,10 +34,6 @@ import java.io.File;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.ar.core.ArCoreApk;
-import com.journeyapps.barcodescanner.ScanContract;
-import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -206,6 +200,31 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+        // =====================================================
+        // TOMBOL 7: LEADERBOARD
+        // =====================================================
+        View btnLeaderboard = findViewById(R.id.btn_leaderboard);
+        if (btnLeaderboard != null) {
+            btnLeaderboard.setOnClickListener(v -> {
+                animateButton(v);
+                v.postDelayed(() -> {
+                    Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
+                    startActivity(intent);
+                }, 150);
+            });
+        }
+
+        // =====================================================
+        // TERAPKAN ANIMASI JATUH BERJEJER (SLIDE DOWN)
+        // =====================================================
+        View[] mainViewsToAnimate = new View[]{
+                btnPetualangan, btnMateri,
+                btnScanQR, btnKuis,
+                btnKoleksi, btnCaraPakai,
+                btnLeaderboard
+        };
+        AnimationHelper.animateStaggeredSlideDown(mainViewsToAnimate, 300, 100);
+
         // ------------------ ANIMASI MASKOT ------------------
         ImageView ivMaskot = findViewById(R.id.iv_maskot);
         if (ivMaskot != null) {
@@ -266,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
         options.setCameraId(0);
         options.setBeepEnabled(true);
         options.setBarcodeImageEnabled(false);
-        options.setOrientationLocked(true);
+        options.setOrientationLocked(false); // Buka kunci orientasi agar bisa scan dari berbagai sudut
         options.setCaptureActivity(CustomScannerActivity.class);
         qrScanLauncher.launch(options);
     }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
@@ -49,8 +48,8 @@ public class HasilKuisActivity extends AppCompatActivity {
         TextView star3 = findViewById(R.id.star3);
 
         tvScoreNumber.setText(String.valueOf(skor));
-        tvCorrect.setText("✅ " + benar + " Benar");
-        tvWrong.setText("❌ " + salah + " Salah");
+        tvCorrect.setText(benar + " Benar");
+        tvWrong.setText(salah + " Salah");
 
         // Logic for Grade
         if (skor >= 90) {
@@ -76,7 +75,7 @@ public class HasilKuisActivity extends AppCompatActivity {
         }
 
         // Tombol Ulangi Kuis
-        AppCompatButton btnUlangi = findViewById(R.id.btn_ulangi_kuis);
+        android.view.View btnUlangi = findViewById(R.id.btn_ulangi_kuis);
         if (btnUlangi != null) {
             btnUlangi.setOnClickListener(v -> {
                 Intent intent = new Intent(HasilKuisActivity.this, KuisMasukActivity.class);
@@ -87,7 +86,7 @@ public class HasilKuisActivity extends AppCompatActivity {
         }
 
         // Tombol Kembali ke Home
-        AppCompatButton btnHome = findViewById(R.id.btn_kembali_home);
+        android.view.View btnHome = findViewById(R.id.btn_kembali_home);
         btnHome.setOnClickListener(v -> {
             Intent intent = new Intent(HasilKuisActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

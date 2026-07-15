@@ -28,18 +28,18 @@ public class NotificationReceiver extends BroadcastReceiver {
 
         // Pesan notifikasi yang ramah anak, berganti-ganti setiap hari
         String[] pesanList = {
-            "Yuk, jelajahi Gedung Papak dan uji pemahamanmu hari ini! 🏛️",
-            "Sudah belajar sejarah Salatiga belum? Ayo, kamu pasti bisa! 💪",
-            "Hei! Ada kuis seru menantimu di ASMARA! Siap bermain? 🧠",
-            "Jangan lupa belajar! Maskot ASMARA sudah menunggumu lho! 🦉",
-            "Hari ini kamu mau dapat berapa bintang? Ayo main ASMARA! ⭐"
+            "Yuk, jelajahi Gedung Papak dan uji pemahamanmu hari ini!",
+            "Sudah belajar sejarah Salatiga belum? Ayo, kamu pasti bisa!",
+            "Hei! Ada kuis seru menantimu di ASMARA! Siap bermain?",
+            "Jangan lupa belajar! Maskot ASMARA sudah menunggumu lho!",
+            "Hari ini kamu mau dapat berapa bintang? Ayo main ASMARA!"
         };
         int hariIni = (int) (System.currentTimeMillis() / 86400000 % pesanList.length);
         String pesan = pesanList[hariIni];
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Halo! Waktunya Belajar Sejarah! 🦉")
+                .setSmallIcon(R.drawable.logo_asmara)
+                .setContentTitle("Halo! Waktunya Belajar Sejarah!")
                 .setContentText(pesan)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(pesan))
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

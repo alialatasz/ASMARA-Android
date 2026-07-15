@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +15,17 @@ import com.google.ar.sceneform.SceneView;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
 import com.google.ar.sceneform.rendering.ModelRenderable;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.view.PixelCopy;
+import androidx.core.content.FileProvider;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Viewer3DActivity extends AppCompatActivity {
 
@@ -71,8 +81,8 @@ public class Viewer3DActivity extends AppCompatActivity {
             tvSubjudul.setText("Bagian: " + bagianGedung);
         }
 
-        // Update teks tombol materi
-        btnMateri.setText("📖  Lihat Materi " + namaBangun);
+        // Update teks tombol
+        btnMateri.setText("Lihat Materi " + namaBangun);
 
         btnBack.setOnClickListener(v -> {
             finish();
@@ -86,6 +96,11 @@ public class Viewer3DActivity extends AppCompatActivity {
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
+
+        FloatingActionButton btnScreenshot = findViewById(R.id.btn_screenshot);
+        if (btnScreenshot != null) {
+            btnScreenshot.setOnClickListener(v -> takeScreenshotAndShare());
+        }
 
         // Setup Detektor Gestur (Cubit dan Geser)
         setupGestures();
@@ -119,10 +134,10 @@ public class Viewer3DActivity extends AppCompatActivity {
                     modelNode.setLocalScale(new Vector3(currentScale, currentScale, currentScale));
                     updateModelRotation();
 
-                    tvInfo.setText(namaBangun + " berhasil dimuat!\n✨ Geser 1 jari untuk memutar\n✨ Cubit 2 jari untuk memperbesar");
+                    tvInfo.setText(namaBangun + " berhasil dimuat!\nGeser 1 jari untuk memutar\nCubit 2 jari untuk memperbesar");
                 })
                 .exceptionally(throwable -> {
-                    tvInfo.setText("⚠️ Model 3D \"" + namaFileModel + "\" belum tersedia.\nFile .glb/.gltf perlu ditambahkan ke folder assets.");
+                    tvInfo.setText("Model 3D \"" + namaFileModel + "\" belum tersedia.\nFile .glb/.gltf perlu ditambahkan ke folder assets.");
                     return null;
                 });
     }
@@ -207,5 +222,58 @@ public class Viewer3DActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         sceneView.pause();
+    }
+
+    private void takeScreenshotAndShare() {
+        // PixelCopy membutuhkan Surface dari SceneView
+        if (sceneView == null) return;
+        
+        Toast literalToast = Toast.makeText(this, "Mengambil foto...", Toast.LENGTH_SHORT);
+        literalToast.show();
+
+        // Siapkan bitmap
+        Bitmap bitmap = Bitmap.createBitmap(sceneView.getWidth(), sceneView.getHeight(), Bitmap.Config.ARGB_8888);
+        
+        final HandlerThread handlerThread = new HandlerThread("PixelCopier");
+        handlerThread.start();
+        
+        PixelCopy.request(sceneView, bitmap, (copyResult) -> {
+            if (copyResult == PixelCopy.SUCCESS) {
+                try {
+                    // Buat file sementara
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+                    String fileName = "ASMARA_" + timeStamp + ".jpg";
+                    File cachePath = new File(getExternalCacheDir(), "images");
+                    cachePath.mkdirs(); // don't forget to make the directory
+                    File imagePath = new File(cachePath, fileName);
+                    
+                    FileOutputStream stream = new FileOutputStream(imagePath);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    stream.close();
+                    
+                    // Share Intent
+                    Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".provider", imagePath);
+                    if (contentUri != null) {
+                        Intent shareIntent = new Intent();
+                        shareIntent.setAction(Intent.ACTION_SEND);
+                        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, "Lihat eksplorasi 3D saya di aplikasi ASMARA! #BelajarGeometri");
+                        
+                        // Menjalankan di UI thread
+                        runOnUiThread(() -> {
+                            literalToast.cancel();
+                            startActivity(Intent.createChooser(shareIntent, "Bagikan karya 3D-mu via"));
+                        });
+                    }
+                } catch (Exception e) {
+                    runOnUiThread(() -> Toast.makeText(Viewer3DActivity.this, "Gagal memproses foto", Toast.LENGTH_SHORT).show());
+                }
+            } else {
+                runOnUiThread(() -> Toast.makeText(Viewer3DActivity.this, "Gagal mengambil foto", Toast.LENGTH_SHORT).show());
+            }
+            handlerThread.quitSafely();
+        }, new Handler(handlerThread.getLooper()));
     }
 }

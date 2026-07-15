@@ -242,7 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="64dp"
                     android:text="UJI PEMAHAMAN"
-                    app:drawableStartCompat="@drawable/ic_quiz"
+                    app:drawableStartCompat="@drawable/ic_guide_quiz"
                     android:drawablePadding="12dp"
                     android:textSize="16sp"
                     android:textStyle="bold"

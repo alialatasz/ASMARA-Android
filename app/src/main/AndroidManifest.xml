@@ -32,6 +32,16 @@
         </activity>
 
         <activity
+            android:name=".LeaderboardActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".OnboardingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
@@ -56,8 +66,23 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" />
+        </provider>
+
         <activity
             android:name=".KoleksiActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".SejarahDetailActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
 

@@ -1,13 +1,13 @@
 package com.asmara.app;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
@@ -158,7 +158,7 @@ public class ProfilActivity extends AppCompatActivity {
         MaterialButton btnReset = findViewById(R.id.btn_reset);
         btnReset.setOnClickListener(v -> {
             new AlertDialog.Builder(this)
-                .setTitle("⚠️ Reset Progress?")
+                .setTitle("Reset Progress?")
                 .setMessage("Semua statistik dan lencana kamu akan direset ke nol. Nama dan avatar tetap tersimpan. Yakin?")
                 .setPositiveButton("Ya, Re  set", (dialog, which) -> {
                     prefs.edit()
@@ -171,7 +171,7 @@ public class ProfilActivity extends AppCompatActivity {
                     FirebaseManager.backupDataProfil(ProfilActivity.this);
                     muatStatistik();
                     muatBadge();
-                    Toast.makeText(this, "Progress berhasil direset 🔄", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Progress berhasil direset", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Batal", null)
                 .show();
@@ -193,25 +193,50 @@ public class ProfilActivity extends AppCompatActivity {
         // Sembunyikan keyboard
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         if (imm != null) imm.hideSoftInputFromWindow(etNama.getWindowToken(), 0);
-        Toast.makeText(this, "✅ Nama berhasil disimpan!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Nama berhasil disimpan!", Toast.LENGTH_SHORT).show();
     }
 
     private void tampilkanDialogAvatar() {
         // Nama-nama lucu untuk setiap avatar
-        String[] AVATAR_NAMES = {
+        final String[] AVATAR_NAMES = {
             "Rubah Cerdik", "Beruang Kuat", "Singa Pemberani", "Katak Lincah",
             "Kupu-kupu Indah", "Lumba-lumba Ramah", "Elang Gagah", "Panda Gemas"
         };
         
-        String[] items = new String[AVATAR_EMOJI.length + 1];
-        items[0] = "📸 Pilih dari Galeri HP";
-        for (int i = 0; i < AVATAR_EMOJI.length; i++) {
-            items[i + 1] = AVATAR_EMOJI[i] + "  " + AVATAR_NAMES[i];
-        }
+        android.widget.ListAdapter adapter = new android.widget.ArrayAdapter<String>(
+                this, R.layout.item_avatar_dialog, AVATAR_NAMES) {
+            @androidx.annotation.NonNull
+            @Override
+            public View getView(int position, @androidx.annotation.Nullable View convertView, @androidx.annotation.NonNull android.view.ViewGroup parent) {
+                if (convertView == null) {
+                    convertView = getLayoutInflater().inflate(R.layout.item_avatar_dialog, parent, false);
+                }
+                
+                ImageView icon = convertView.findViewById(R.id.iv_avatar_icon);
+                TextView emoji = convertView.findViewById(R.id.tv_avatar_emoji);
+                TextView name = convertView.findViewById(R.id.tv_avatar_name);
+                
+                if (position == 0) {
+                    icon.setVisibility(View.VISIBLE);
+                    emoji.setVisibility(View.GONE);
+                    name.setText("Pilih dari Galeri HP");
+                } else {
+                    icon.setVisibility(View.GONE);
+                    emoji.setVisibility(View.VISIBLE);
+                    emoji.setText(AVATAR_EMOJI[position - 1]);
+                    name.setText(AVATAR_NAMES[position - 1]);
+                }
+                return convertView;
+            }
+            @Override
+            public int getCount() {
+                return AVATAR_NAMES.length + 1;
+            }
+        };
         
         new AlertDialog.Builder(this)
             .setTitle("Pilih Avatarmu!")
-            .setItems(items, (dialog, which) -> {
+            .setAdapter(adapter, (dialog, which) -> {
                 if (which == 0) {
                     Intent intent = new Intent(Intent.ACTION_PICK);
                     intent.setType("image/*");

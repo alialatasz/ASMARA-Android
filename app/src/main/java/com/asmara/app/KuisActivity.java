@@ -6,7 +6,6 @@ import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
@@ -172,7 +171,7 @@ public class KuisActivity extends AppCompatActivity {
         btnPrev.setEnabled(currentSoalIndex > 0);
         
         if (currentSoalIndex == soalList.size() - 1) {
-            btnNext.setText("SELESAI ✅");
+            btnNext.setText("SELESAI");
             btnNext.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.success)));
         } else {
             btnNext.setText("SELANJUTNYA →");
@@ -264,8 +263,8 @@ public class KuisActivity extends AppCompatActivity {
                     vibrator.vibrate(new long[]{0, 50, 50, 50}, -1);
                 }
             }
-            Snackbar.make(findViewById(android.R.id.content), "✅ Benar! " + cleanedFeedback, Snackbar.LENGTH_SHORT)
-                .setBackgroundTint(getColor(R.color.success)).show();
+            Snackbar.make(findViewById(android.R.id.content), "Benar! " + cleanedFeedback, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark)).show();
         } else {
             if (vibrator != null && vibrator.hasVibrator()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -274,8 +273,8 @@ public class KuisActivity extends AppCompatActivity {
                     vibrator.vibrate(300);
                 }
             }
-            Snackbar.make(findViewById(android.R.id.content), "❌ Salah. " + cleanedFeedback, Snackbar.LENGTH_SHORT)
-                .setBackgroundTint(getColor(R.color.danger)).show();
+            Snackbar.make(findViewById(android.R.id.content), "Salah. " + cleanedFeedback, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(getResources().getColor(android.R.color.holo_red_dark)).show();
         }
 
         // Auto next to unanswered
