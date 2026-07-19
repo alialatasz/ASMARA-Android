@@ -38,15 +38,29 @@ public class CaraPakaiActivity extends AppCompatActivity {
 
     private void downloadSmartcard() {
         try {
-            InputStream in = getAssets().open("smartcard_asmara.pdf");
-            File downloadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            if (!downloadDir.exists()) {
-                downloadDir.mkdirs();
-            }
-            String fileName = "Smartcard_ASMARA_" + System.currentTimeMillis() + ".pdf";
-            File outFile = new File(downloadDir, fileName);
+            InputStream in = getAssets().open("ASMARACard.pdf");
+            String fileName = "ASMARACard.pdf";
+            java.io.OutputStream out;
             
-            OutputStream out = new java.io.FileOutputStream(outFile);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                android.content.ContentResolver resolver = getContentResolver();
+                android.content.ContentValues contentValues = new android.content.ContentValues();
+                contentValues.put(android.provider.MediaStore.MediaColumns.DISPLAY_NAME, fileName);
+                contentValues.put(android.provider.MediaStore.MediaColumns.MIME_TYPE, "application/pdf");
+                contentValues.put(android.provider.MediaStore.MediaColumns.RELATIVE_PATH, android.os.Environment.DIRECTORY_DOWNLOADS);
+                android.net.Uri uri = resolver.insert(android.provider.MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues);
+                out = resolver.openOutputStream(uri);
+            } else {
+                java.io.File downloadDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_DOWNLOADS);
+                if (!downloadDir.exists()) downloadDir.mkdirs();
+                java.io.File outFile = new java.io.File(downloadDir, fileName);
+                out = new java.io.FileOutputStream(outFile);
+                
+                android.media.MediaScannerConnection.scanFile(this, 
+                    new String[]{outFile.getAbsolutePath()}, 
+                    new String[]{"application/pdf"}, null);
+            }
+            
             byte[] buffer = new byte[1024];
             int read;
             while ((read = in.read(buffer)) != -1) {
@@ -58,8 +72,8 @@ public class CaraPakaiActivity extends AppCompatActivity {
             
             Toast.makeText(this, "Berhasil! File PDF tersimpan di folder Download HP Anda", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
-            Toast.makeText(this, "Gagal mengunduh file PDF", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
+            Toast.makeText(this, "Gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

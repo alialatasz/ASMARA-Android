@@ -29,6 +29,19 @@
                 android:layout_height="280dp"
                 android:background="@drawable/bg_welcome_gradient"
                 app:layout_constraintTop_toTopOf="parent" />
+                
+            <!-- Watermark Logo ASMARA -->
+            <ImageView
+                android:layout_width="450dp"
+                android:layout_height="450dp"
+                android:src="@drawable/logo_asmara"
+                app:tint="#FFFFFF"
+                android:alpha="0.12"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/bg_header"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="-20dp"
+                android:layout_marginBottom="-85dp" />
 
             <!-- Tombol Kembali -->
             <com.google.android.material.floatingactionbutton.FloatingActionButton

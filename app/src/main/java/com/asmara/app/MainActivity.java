@@ -447,11 +447,13 @@ public class MainActivity extends AppCompatActivity {
 
         // Judul
         TextView tvJudul = new TextView(this);
-        tvJudul.setText("🌐 Petualangan ASMARA");
+        tvJudul.setText("Petualangan ASMARA");
         tvJudul.setTextSize(22);
         tvJudul.setTextColor(0xFF311B92);
         tvJudul.setTypeface(null, android.graphics.Typeface.BOLD);
         tvJudul.setGravity(Gravity.CENTER);
+        tvJudul.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_compass_purple, 0, 0, 0);
+        tvJudul.setCompoundDrawablePadding(16);
         containerUtama.addView(tvJudul);
 
         // Subjudul
@@ -467,16 +469,19 @@ public class MainActivity extends AppCompatActivity {
         // TOMBOL 1: Mode AR (Kamera)
         // =====================
         MaterialButton btnAR = new MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle);
-        btnAR.setText(arCoreDidukung ? "📸  Mode AR (Kamera)" : "📸  Mode AR (Tidak Didukung)");
+        btnAR.setText(arCoreDidukung ? "Mode AR (Kamera)" : "Mode AR (Tidak Didukung)");
         btnAR.setTextSize(15);
         btnAR.setAllCaps(false);
         btnAR.setCornerRadius(40);
         btnAR.setPadding(0, 30, 0, 30);
         btnAR.setEnabled(arCoreDidukung);
+        btnAR.setIconResource(R.drawable.ic_camera);
+        btnAR.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
 
         if (arCoreDidukung) {
             btnAR.setBackgroundColor(0xFF6200EA);
             btnAR.setTextColor(0xFFFFFFFF);
+            btnAR.setIconTint(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
         } else {
             btnAR.setBackgroundColor(0xFFBDBDBD);
             btnAR.setTextColor(0xFF9E9E9E);
@@ -502,13 +507,16 @@ public class MainActivity extends AppCompatActivity {
         // TOMBOL 2: Mode Layar 3D (Virtual) — KOMPATIBEL SEMUA HP
         // =====================
         MaterialButton btnVirtual = new MaterialButton(this);
-        btnVirtual.setText("🖥️  Mode Layar 3D (Semua HP)");
+        btnVirtual.setText("Mode Layar 3D (Semua HP)");
         btnVirtual.setTextSize(15);
         btnVirtual.setAllCaps(false);
         btnVirtual.setCornerRadius(40);
         btnVirtual.setPadding(0, 30, 0, 30);
         btnVirtual.setBackgroundColor(0xFF00BFA5);
         btnVirtual.setTextColor(0xFFFFFFFF);
+        btnVirtual.setIconResource(R.drawable.ic_smartphone_white);
+        btnVirtual.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
+        btnVirtual.setIconTint(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
 
         LinearLayout.LayoutParams paramsTombol2 = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);

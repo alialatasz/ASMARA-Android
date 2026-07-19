@@ -113,15 +113,8 @@ public class SplashActivity extends AppCompatActivity {
 
                     // Pindah ke halaman utama setelah delay animasi
                     new Handler().postDelayed(() -> {
-                        android.content.SharedPreferences prefs = getSharedPreferences("ASMARA_PREFS", MODE_PRIVATE);
-                        boolean isFirstRun = prefs.getBoolean("isFirstRun", true);
-
-                        Intent intent;
-                        if (isFirstRun) {
-                            intent = new Intent(SplashActivity.this, OnboardingActivity.class);
-                        } else {
-                            intent = new Intent(SplashActivity.this, MainActivity.class);
-                        }
+                        // Selalu ke Onboarding (3 slide awal)
+                        Intent intent = new Intent(SplashActivity.this, OnboardingActivity.class);
                         startActivity(intent);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
