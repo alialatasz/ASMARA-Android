@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pattern_tiled">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_glass_header"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:elevation="4dp"
+        android:layout_alignParentTop="true">
+
+        <ImageView
+            android:id="@+id/btn_back_detail"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/primary_dark"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        <TextView
+            android:id="@+id/tv_materi_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="2. Balok"
+            android:textColor="@color/primary_dark"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"/>
+            
+    </LinearLayout>
+
+    <!-- Bottom Navigation Bar -->
+    <LinearLayout
+        android:id="@+id/bottom_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:elevation="16dp"
+        android:gravity="center"
+        android:paddingHorizontal="8dp">
+
+        <!-- Tab Pengertian -->
+        <LinearLayout
+            android:id="@+id/tab_pengertian"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+            
+            <ImageView
+                android:id="@+id/ic_tab_pengertian"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_book_outline"
+                app:tint="@color/primary"/>
+            <TextView
+                android:id="@+id/tv_tab_pengertian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pengertian"
+                android:textSize="12sp"
+                android:textColor="@color/primary"
+                android:layout_marginTop="4dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Tab Ciri-ciri -->
+        <LinearLayout
+            android:id="@+id/tab_ciriciri"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+            
+            <ImageView
+                android:id="@+id/ic_tab_ciriciri"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_koleksi_lencana"
+                app:tint="@color/text_medium"/>
+            <TextView
+                android:id="@+id/tv_tab_ciriciri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ciri-ciri"
+                android:textSize="12sp"
+                android:textColor="@color/text_medium"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Tab Jaring-jaring -->
+        <LinearLayout
+            android:id="@+id/tab_jaring"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+            
+            <ImageView
+                android:id="@+id/ic_tab_jaring"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_collection"
+                app:tint="@color/text_medium"/>
+            <TextView
+                android:id="@+id/tv_tab_jaring"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jaring-jaring"
+                android:textSize="12sp"
+                android:textColor="@color/text_medium"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Main Content Area -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_header"
+        android:layout_above="@id/bottom_nav_bar"
+        android:fillViewport="true">
+        
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+            
+            <!-- WADAH 1: PENGERTIAN -->
+            <com.asmara.app.BlurGlassView
+                android:id="@+id/layout_pengertian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp"
+                app:glassAlpha="0.95"
+                android:visibility="visible">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="center_horizontal">
+                    
+                    <TextView
+                        android:id="@+id/badge_pengertian"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pengertian"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:background="@drawable/tag_bg_blue"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="8dp"
+                        android:layout_marginBottom="16dp"/>
+                        
+                    <TextView
+                        android:id="@+id/tv_content_pengertian"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Konten pengertian..."
+                        android:textColor="@color/text_dark"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="6dp"
+                        android:layout_marginBottom="24dp"/>
+                        
+                    <ImageView
+                        android:id="@+id/iv_content_pengertian"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:src="@drawable/soal_1"
+                        android:scaleType="fitCenter"/>
+                </LinearLayout>
+            </com.asmara.app.BlurGlassView>
+
+            <!-- WADAH 2: CIRI-CIRI -->
+            <com.asmara.app.BlurGlassView
+                android:id="@+id/layout_ciriciri"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp"
+                app:glassAlpha="0.95"
+                android:visibility="gone">
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="center_horizontal">
+                    
+                    <TextView
+                        android:id="@+id/badge_ciriciri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Karakteristik"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:background="@drawable/tag_bg_blue"
+                        android:paddingHorizontal="24dp"
+                        android:paddingVertical="8dp"
+                        android:layout_marginBottom="16dp"/>
+                        
+                    <TextView
+                        android:id="@+id/tv_content_ciriciri"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Konten karakteristik..."
+                        android:textColor="@color/text_dark"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="6dp"/>
+                </LinearLayout>
+            </com.asmara.app.BlurGlassView>
+
+            <!-- WADAH 3: JARING-JARING -->
+            <LinearLayout
+                android:id="@+id/layout_jaring"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                
+                <com.asmara.app.BlurGlassView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:glassColor="#FFFFFF"
+                    app:glassCornerRadius="24dp"
+                    app:glassAlpha="0.95"
+                    android:layout_marginBottom="16dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center_horizontal">
+                        
+                        <TextView
+                            android:id="@+id/badge_jaring"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jaring-jaring"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:background="@drawable/tag_bg_blue"
+                            android:paddingHorizontal="24dp"
+                            android:paddingVertical="8dp"
+                            android:layout_marginBottom="16dp"/>
+                            
+                        <TextView
+                            android:id="@+id/tv_content_jaring"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_dark"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="6dp"
+                            android:layout_marginBottom="16dp"/>
+                            
+                        <ImageView
+                            android:id="@+id/iv_content_jaring"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="fitCenter"/>
+                    </LinearLayout>
+                </com.asmara.app.BlurGlassView>
+                
+                <com.asmara.app.BlurGlassView
+                    android:id="@+id/card_jaring_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:glassColor="#FFFFFF"
+                    app:glassCornerRadius="24dp"
+                    app:glassAlpha="0.95"
+                    android:layout_marginBottom="16dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center_horizontal">
+                        
+                        <TextView
+                            android:id="@+id/tv_content_jaring_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_dark"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="6dp"
+                            android:layout_marginBottom="16dp"
+                            android:visibility="gone"/>
+                            
+                        <ImageView
+                            android:id="@+id/iv_content_jaring_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="fitCenter"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+                </com.asmara.app.BlurGlassView>
+
+                <com.asmara.app.BlurGlassView
+                    android:id="@+id/card_jaring_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:glassColor="#FFFFFF"
+                    app:glassCornerRadius="24dp"
+                    app:glassAlpha="0.95">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center_horizontal">
+                        
+                        <TextView
+                            android:id="@+id/tv_content_jaring_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_dark"
+                            android:textSize="16sp"
+                            android:lineSpacingExtra="6dp"
+                            android:layout_marginBottom="16dp"
+                            android:visibility="gone"/>
+                            
+                        <ImageView
+                            android:id="@+id/iv_content_jaring_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:scaleType="fitCenter"
+                            android:visibility="gone"/>
+                    </LinearLayout>
+                </com.asmara.app.BlurGlassView>
+            </LinearLayout>
+
+        </FrameLayout>
+    </ScrollView>
+</RelativeLayout>
