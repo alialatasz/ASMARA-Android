@@ -188,6 +188,21 @@
                 app:cornerRadius="12dp"
                 android:textAlignment="viewStart"/>
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_dragdrop_launch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mulai Menyusun Pintu!"
+                android:textColor="@color/white"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="12dp"
+                android:paddingVertical="16dp"
+                app:backgroundTint="@color/primary"
+                app:cornerRadius="16dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:visibility="gone"/>
+
         </LinearLayout>
     </ScrollView>
 

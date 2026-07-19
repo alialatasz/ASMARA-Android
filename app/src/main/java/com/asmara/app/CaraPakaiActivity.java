@@ -43,9 +43,10 @@ public class CaraPakaiActivity extends AppCompatActivity {
             if (!downloadDir.exists()) {
                 downloadDir.mkdirs();
             }
-            File outFile = new File(downloadDir, "Smartcard_ASMARA.pdf");
+            String fileName = "Smartcard_ASMARA_" + System.currentTimeMillis() + ".pdf";
+            File outFile = new File(downloadDir, fileName);
             
-            OutputStream out = new FileOutputStream(outFile);
+            OutputStream out = new java.io.FileOutputStream(outFile);
             byte[] buffer = new byte[1024];
             int read;
             while ((read = in.read(buffer)) != -1) {

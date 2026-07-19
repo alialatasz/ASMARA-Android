@@ -49,8 +49,9 @@
                 android:layout_height="wrap_content"
                 android:text="Cara Scan QR Code"
                 app:drawableStartCompat="@drawable/ic_camera"
+                app:drawableTint="@color/primary"
                 android:drawablePadding="12dp"
-                android:textColor="@color/primary_light"
+                android:textColor="@color/primary"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
@@ -175,8 +176,9 @@
                 android:layout_height="wrap_content"
                 android:text="Cara Melihat Objek 3D"
                 app:drawableStartCompat="@drawable/ic_cube"
+                app:drawableTint="@color/primary"
                 android:drawablePadding="12dp"
-                android:textColor="@color/primary_light"
+                android:textColor="@color/primary"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
@@ -246,8 +248,9 @@
                 android:layout_height="wrap_content"
                 android:text="Cara Membuka Materi"
                 app:drawableStartCompat="@drawable/ic_guide_book"
+                app:drawableTint="@color/primary"
                 android:drawablePadding="12dp"
-                android:textColor="@color/primary_light"
+                android:textColor="@color/primary"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
@@ -283,8 +286,9 @@
                 android:layout_height="wrap_content"
                 android:text="Cara Mengerjakan Kuis"
                 app:drawableStartCompat="@drawable/ic_guide_quiz"
+                app:drawableTint="@color/primary"
                 android:drawablePadding="12dp"
-                android:textColor="@color/primary_light"
+                android:textColor="@color/primary"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
@@ -317,10 +321,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Download Kartu Pintar (Smartcard)"
+                android:text="Download Kartu Pintar (ASMARACard)"
                 app:drawableStartCompat="@drawable/ic_save_icon"
+                app:drawableTint="@color/primary"
                 android:drawablePadding="12dp"
-                android:textColor="@color/primary_light"
+                android:textColor="@color/primary"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>

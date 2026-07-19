@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class KuisActivity extends AppCompatActivity {
     private ImageView ivKuisImage;
     private MaterialButton btnOpsiA, btnOpsiB, btnOpsiC;
     private MaterialButton btnPrev, btnNext;
+    private MaterialButton btnDragDropLaunch;
 
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis = 40000; // 40 detik per soal
@@ -54,6 +57,12 @@ public class KuisActivity extends AppCompatActivity {
         btnOpsiC = findViewById(R.id.btn_opsi_c);
         btnPrev = findViewById(R.id.btn_prev);
         btnNext = findViewById(R.id.btn_next);
+        btnDragDropLaunch = findViewById(R.id.btn_dragdrop_launch);
+
+        btnDragDropLaunch.setOnClickListener(v -> {
+            Intent intent = new Intent(this, DragDropActivity.class);
+            startActivityForResult(intent, 1500);
+        });
 
         FloatingActionButton btnBack = findViewById(R.id.btn_back_kuis);
         btnBack.setOnClickListener(v -> finish());
@@ -117,31 +126,31 @@ public class KuisActivity extends AppCompatActivity {
 
     private void loadDataSoal() {
         soalList = new ArrayList<>();
-        soalList.add(new Soal("Saat berkunjung ke Gedung Papak, Dika melihat bagian bawah tiang bendera yang berbentuk ....", new String[]{"Kubus", "Balok", "Limas"}, 1, "Benar! Bagian bawah tiang tersebut memiliki panjang, lebar, dan tinggi yang berbeda sehingga membentuk balok.", "soalno1"));
-        soalList.add(new Soal("Bagian atap Gedung Papak berbentuk bangun ruang apa?", new String[]{"Balok", "Kubus", "Limas"}, 2, "Tepat! Atap bangunannya mengerucut ke atas sehingga membentuk bangun ruang limas.", "soalno2"));
-        soalList.add(new Soal("Gambar dadu di bawah ini, berbentuk bangun ruang apa?", new String[]{"Limas", "Kubus", "Balok"}, 1, "Benar! Dadu memiliki panjang sisi yang sama di setiap permukaannya, yang merupakan ciri utama kubus.", "soalno3"));
-        soalList.add(new Soal("Balok mempunyai bentuk yang ....", new String[]{"Panjang", "Bulat", "Runcing"}, 0, "Betul! Secara umum, balok memiliki bentuk yang memanjang karena perbedaaan ukuran rusuknya.", null));
-        soalList.add(new Soal("Tiang Gedung Papak pada gambar diatas berbentuk…", new String[]{"Kubus", "Limas", "Balok"}, 2, "Hebat! Tiang penyangga tersebut berbentuk balok memanjang yang kokoh.", "soalno4"));
-        soalList.add(new Soal("Benda di bawah ini yang berbentuk limas adalah…", new String[]{"Tempat Pensil", "Piramida", "Kotak Kado"}, 1, "Tepat! Piramida adalah contoh paling jelas dari bangun ruang limas.", null));
-        soalList.add(new Soal("Bangun ruang yang memiliki puncak adalah ....", new String[]{"Limas", "Kubus", "Balok"}, 0, "Benar! Sisi-sisi tegak pada limas bertemu pada satu titik yang disebut puncak.", null));
-        soalList.add(new Soal("Bentuk limas pada Gedung Papak sering digunakan untuk ....", new String[]{"Atap", "Roda", "Jendela"}, 0, "Betul! Bentuk limas sangat umum digunakan sebagai struktur atap bangunan.", null));
-        soalList.add(new Soal("Limas mempunyai bagian atas yang ....", new String[]{"Runcing", "Bulat", "Datar"}, 0, "Tepat! Titik puncak pada limas membuatnya terlihat runcing di bagian atas.", null));
-        soalList.add(new Soal("Batu bata yang digunakan membangun Gedung Papak berbentuk ....", new String[]{"Balok", "Kubus", "Limas"}, 0, "Benar! Batu bata memiliki struktur bangun ruang balok.", "soalno9"));
-        soalList.add(new Soal("Balok membantu membuat miniatur Gedung Papak pada bagian ....", new String[]{"Dinding", "Awan", "Pohon"}, 0, "Betul! Bangun ruang balok sangat cocok digunakan untuk merepresentasikan dinding yang lurus dan tegak.", null));
-        soalList.add(new Soal("Kotak tisu seperti pada gambar diatas berbentuk…", new String[]{"Kubus", "Balok", "Prisma"}, 1, "Benar! Kotak tisu tersebut berbentuk balok.", "soalno11"));
-        soalList.add(new Soal("Bentuk bangunan pada Gedung Papak diatas adalah..", new String[]{"Kubus", "Balok", "Limas"}, 1, "Tepat! Struktur utama bangunan tersebut memanjang sehingga menyerupai balok.", "soalno12"));
-        soalList.add(new Soal("Benda berbentuk kubus yang ada di sekitar kita adalah ....", new String[]{"Dadu", "Penggaris", "Buku Tulis"}, 0, "Benar! Dadu adalah salah satu contoh benda sehari-hari yang berbentuk kubus sempurna.", null));
-        soalList.add(new Soal("Ketika kamu melihat atap pada bangunan Gedung Papak, berbentuk apakah atapnya?", new String[]{"Limas", "Balok", "Kubus"}, 0, "Betul! Sekali lagi, atap bangunan ini mengerucut menyerupai limas.", null));
-        soalList.add(new Soal("Berbentuk apakah kotak susu pada gambar diatas?", new String[]{"Balok", "Kubus", "Limas"}, 0, "Tepat! Kemasan kotak susu memanjang vertikal sehingga berbentuk balok.", "soalno15"));
-        soalList.add(new Soal("Gedung Papak berada di Kota?", new String[]{"Semarang", "Bandung", "Salatiga"}, 2, "Hebat! Gedung Papak adalah warisan arsitektur yang ikonik di Kota Salatiga.", null));
-        soalList.add(new Soal("Gedung Papak Sekarang menjadi?", new String[]{"Kantor Wali Kota", "Rumah Sakit", "Kantor Pos"}, 0, "Benar! Bangunan bersejarah ini dialihfungsikan sebagai pusat pemerintahan kota.", null));
-        soalList.add(new Soal("Gedung Papak memiliki ciri khas bangunan?", new String[]{"Modern", "Kolonial", "Tradisional"}, 1, "Tepat! Arsitekturnya kental dengan gaya kolonial Belanda era Hindia Belanda.", null));
-        soalList.add(new Soal("Kubus, Balok dan Limas termasuk bangun?", new String[]{"Datar", "Ruang", "Lengkung"}, 1, "Benar! Ketiganya memiliki volume dan dimensi tiga, sehingga disebut bangun ruang.", null));
-        soalList.add(new Soal("Gedung Papak dominan berwarna?", new String[]{"Putih", "Merah", "Hitam"}, 0, "Betul! Warna putih sangat dominan pada arsitektur gaya kolonial untuk memantulkan panas.", null));
-        soalList.add(new Soal("Saat mengamati Gedung Papak, Ali melihat bangunan utama yang bentuknya lebih panjang daripada kubus. Bangunan tersebut menyerupai ....", new String[]{"Limas", "Balok", "Bola"}, 1, "Tepat! Balok memiliki dimensi yang lebih memanjang dibandingkan kubus.", null));
-        soalList.add(new Soal("Indah dan teman-temannya membuat miniatur Gedung Papak. Untuk membuat bagian atap yang runcing, mereka menggunakan bangun ruang ....", new String[]{"Kubus", "Balok", "Limas"}, 2, "Benar! Bangun limas sangat pas merepresentasikan atap.", null));
-        soalList.add(new Soal("Saat membuat atap miniatur Gedung Papak, kelompok Nurul menggunakan limas. Mereka melihat bagian samping limas berbentuk segitiga. Limas memiliki sisi samping berbentuk ....", new String[]{"Lingkaran", "Persegi", "Segitiga"}, 2, "Tepat! Semua sisi tegak pada sebuah limas berbentuk segitiga.", null));
-        soalList.add(new Soal("Saat membuat miniatur Gedung Papak, Bagas memegang sebuah kubus. Ia memperhatikan bahwa setiap sisi kubus berbentuk ...", new String[]{"Persegi", "Segitiga", "Lingkaran"}, 0, "Sempurna! Sebuah kubus dibentuk oleh enam buah sisi yang semuanya berbentuk persegi.", null));
+        soalList.add(new Soal("Saat berkunjung ke Gedung Papak, Kresna melihat bagian bawah tiang bendera yang berbentuk ...", new String[]{"Kubus", "Balok", "Limas"}, 1, "Bagian bawah tiang bendera berbentuk balok karena mempunyai 6 sisi nya berbentuk persegi panjang.", "soal_1"));
+        soalList.add(new Soal("Bagian atap Gedung Papak pada gambar di atas berbentuk bangun ruang apa?", new String[]{"Balok", "Kubus", "Limas"}, 2, "Atap Gedung Papak berbentuk limas karena limas memiliki sisi-sisi berbentuk segitiga dan satu titik puncak.", "soal_2"));
+        soalList.add(new Soal("Berbentuk apakah bangun di bawah ini?", new String[]{"Persegi", "Persegi Panjang", "Segitiga"}, 1, "Bangun ini adalah persegi panjang karena mempunyai 2 sisi panjang dan 2 sisi pendek.", "soal_3"));
+        soalList.add(new Soal("Kubus pada gambar di bawah ini, memiliki jumlah sudut sebanyak… titik sudut", new String[]{"8", "6", "4"}, 0, "Karena salah satu unsur-unsur kubus yaitu mempunyai 8 titik sudut.", "soal_4"));
+        soalList.add(new Soal("Tiang Gedung Papak pada gambar di bawah berbentuk…", new String[]{"Kubus", "Balok", "Limas"}, 1, "Tiang Gedung Papak berbentuk balok karena balok mempunyai 6 sisi berbentuk persegi panjang.", "soal_5"));
+        soalList.add(new Soal("Berbentuk apakah bangun datar di bawah ini…", new String[]{"Segitiga", "Persegi", "Persegi Panjang"}, 0, "Berbentuk segitiga karena mempunyai 3 sisi dan 3 titik sudut.", "soal_6"));
+        soalList.add(new Soal("Bangun ruang yang memiliki puncak adalah ....", new String[]{"Limas", "Kubus", "Balok"}, 0, "Karena salah satu unsur-unsur limas yaitu mempunyai satu titik puncak.", null));
+        soalList.add(new Soal("Bagian pada Gedung Papak dibawah ini berbentuk ....", new String[]{"Kubus", "Balok", "Limas"}, 0, "Bagian Gedung Papak ini berbentuk kubus karena semua sisinya berbentuk persegi.", "soal_8"));
+        soalList.add(new Soal("Bangun datar yang mempunyai 2 sisi panjang dan 2 sisi pendek yang saling berhadapan disebut…", new String[]{"Persegi", "Persegi Panjang", "Segitiga"}, 1, "Persegi panjang mempunyai 2 sisi panjang dan 2 sisi pendek.", null));
+        soalList.add(new Soal("Gambar di bawah ini merupakan jaring-jaring dari bangun ruang..", new String[]{"Balok", "Kubus", "Limas"}, 2, "Jaring-jaring ini dapat dilipat menjadi limas karena mempunyai alas berbentuk persegi dan sisi berbentuk segitiga.", "soal_10"));
+        soalList.add(new Soal("Jumlah sisi bangun ruang kubus di bawah ini adalah…", new String[]{"4", "5", "6"}, 2, "Kubus mempunyai 6 sisi yang semuanya berbentuk persegi.", "soal_11"));
+        soalList.add(new Soal("Perhatikan bangun berikut. Bangun di atas disebut segitiga karena…", new String[]{"Karena semua sisinya sama panjang", "Karena mempunyai 2 pasang sisi yang sama panjang", "Karena mempunyai 3 sisi"}, 2, "Bangun ini adalah segitiga karena mempunyai 3 sisi dan 3 titik sudut, sesuai dengan ciri-ciri bangun segitiga.", "soal_12"));
+        soalList.add(new Soal("Bangun yang memiliki empat sisi sama panjang adalah…", new String[]{"Persegi Panjang", "Segitiga", "Persegi"}, 2, "Bangun ini disebut persegi karena mempunyai 4 sisi yang sama panjang. Persegi juga memiliki 4 titik sudut.", null));
+        soalList.add(new Soal("Mengapa jendela Gedung Papak tersebut disebut persegi panjang?", new String[]{"Karena semua sisinya sama panjang", "Karena mempunyai 2 pasang sisi yang sama panjang", "Karena mempunyai 3 sisi"}, 1, "Jendela Gedung Papak berbentuk persegi panjang karena mempunyai 2 sisi panjang dan 2 sisi pendek yang saling berhadapan sama panjang.", "soal_14"));
+        soalList.add(new Soal("Susun kembali pintu Gedung Papak berikut! (Drag and Drop)", new String[]{"A", "B", "C"}, 0, "Hebat, kamu berhasil menyusun pintu!", "soal_15_dragdrop"));
+        soalList.add(new Soal("Balok pada gambar di bawah ini memiliki sudut yang berjumlah… titik sudut.", new String[]{"8", "2", "6"}, 0, "Karena salah satu unsur-unsur balok yaitu mempunyai 8 titik sudut.", "soal_16"));
+        soalList.add(new Soal("Jaring-jaring bangun ruang apakah gambar di bawah ini?", new String[]{"Balok", "Kubus", "Limas"}, 1, "Jaring-jaring ini dapat dilipat menjadi kubus karena terdiri dari 6 sisi berbentuk persegi. Setelah dilipat, semua sisinya membentuk bangun ruang kubus.", "soal_17"));
+        soalList.add(new Soal("Gambar di bawah ini merupakan jaring-jaring dari bangun ruang apa?", new String[]{"Kubus", "Balok", "Limas"}, 1, "Jaring-jaring ini dapat dilipat menjadi balok karena memiliki 6 sisi berbentuk persegi panjang. Setelah dilipat, terbentuk bangun ruang balok.", "soal_18"));
+        soalList.add(new Soal("Indah dan teman-temannya membuat miniatur Gedung Papak. Untuk membuat bagian atap yang runcing, mereka menggunakan bangun ruang ....", new String[]{"Kubus", "Balok", "Limas"}, 2, "Atap miniatur Gedung Papak menggunakan bangun ruang limas karena limas mempunyai satu titik puncak dan sisi-sisinya berbentuk segitiga.", null));
+        soalList.add(new Soal("Saat membuat atap miniatur Gedung Papak, kelompok Nurul menggunakan limas. Limas memiliki sisi samping berbentuk ....", new String[]{"Lingkaran", "Persegi", "Segitiga"}, 2, "Sisi samping limas berbentuk segitiga. Itulah salah satu ciri bangun ruang limas.", null));
+        soalList.add(new Soal("Saat membuat miniatur Gedung Papak, Bagas memegang sebuah kubus. Ia memperhatikan bahwa setiap sisi kubus berbentuk ...", new String[]{"Persegi", "Segitiga", "Lingkaran"}, 0, "Setiap sisi kubus berbentuk persegi. Kubus mempunyai 6 sisi yang semuanya berbentuk persegi.", null));
+        soalList.add(new Soal("Gedung Papak berada di Kota?", new String[]{"Semarang", "Bandung", "Salatiga"}, 2, "Benar! Gedung Papak berada di Kota Salatiga dan gedung ini sekarang menjadi salah satu bangunan penting di Kota Salatiga.", null));
+        soalList.add(new Soal("Gedung Papak sekarang menjadi?", new String[]{"Kantor Wali Kota", "Rumah Sakit", "Kantor Pos"}, 0, "Benar! Sekarang Gedung Papak digunakan sebagai Kantor Wali Kota Salatiga untuk menjalankan pemerintahan kota.", null));
+        soalList.add(new Soal("Gedung Papak memiliki ciri khas bangunan?", new String[]{"Modern", "Kolonial", "Tradisional"}, 1, "Benar! Gedung Papak memiliki gaya bangunan kolonial Belanda yang menjadi ciri khasnya sejak dahulu.", null));
+        soalList.add(new Soal("Gedung Papak dominan berwarna?", new String[]{"Putih", "Merah", "Hitam"}, 0, "Benar! Gedung Papak memiliki gaya bangunan kolonial Belanda yang menjadi ciri khasnya sejak dahulu.", null));
     }
 
     private void tampilkanSoal() {
@@ -166,6 +175,19 @@ public class KuisActivity extends AppCompatActivity {
             if(imageRes != 0) ivKuisImage.setImageResource(imageRes);
         } else {
             ivKuisImage.setVisibility(View.GONE);
+        }
+        
+        // Handle Drag Drop Question Type
+        if ("soal_15_dragdrop".equals(soal.getImageName())) {
+            btnOpsiA.setVisibility(View.GONE);
+            btnOpsiB.setVisibility(View.GONE);
+            btnOpsiC.setVisibility(View.GONE);
+            btnDragDropLaunch.setVisibility(View.VISIBLE);
+        } else {
+            btnOpsiA.setVisibility(View.VISIBLE);
+            btnOpsiB.setVisibility(View.VISIBLE);
+            btnOpsiC.setVisibility(View.VISIBLE);
+            btnDragDropLaunch.setVisibility(View.GONE);
         }
         
         btnPrev.setEnabled(currentSoalIndex > 0);
@@ -263,8 +285,6 @@ public class KuisActivity extends AppCompatActivity {
                     vibrator.vibrate(new long[]{0, 50, 50, 50}, -1);
                 }
             }
-            Snackbar.make(findViewById(android.R.id.content), "Benar! " + cleanedFeedback, Snackbar.LENGTH_SHORT)
-                .setBackgroundTint(getResources().getColor(android.R.color.holo_green_dark)).show();
         } else {
             if (vibrator != null && vibrator.hasVibrator()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -273,12 +293,45 @@ public class KuisActivity extends AppCompatActivity {
                     vibrator.vibrate(300);
                 }
             }
-            Snackbar.make(findViewById(android.R.id.content), "Salah. " + cleanedFeedback, Snackbar.LENGTH_SHORT)
-                .setBackgroundTint(getResources().getColor(android.R.color.holo_red_dark)).show();
         }
 
-        // Auto next to unanswered
-        tvPertanyaan.postDelayed(this::autoNextUnanswered, 1500);
+        // Tampilkan Dialog Penjelasan
+        tampilkanDialogFeedback(isCorrect, rawFeedback);
+    }
+    
+    private void tampilkanDialogFeedback(boolean isCorrect, String penjelasan) {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.dialog_feedback_maskot);
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            int width = (int)(getResources().getDisplayMetrics().widthPixels * 0.90);
+            dialog.getWindow().setLayout(width, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+
+        TextView tvJudul = dialog.findViewById(R.id.tv_judul_feedback);
+        TextView tvPenjelasan = dialog.findViewById(R.id.tv_penjelasan_feedback);
+        MaterialButton btnLanjut = dialog.findViewById(R.id.btn_lanjut_feedback);
+        ImageView imgMaskot = dialog.findViewById(R.id.img_maskot_feedback);
+
+        if (isCorrect) {
+            tvJudul.setText("Hebat! Jawabanmu Benar");
+            tvJudul.setTextColor(getColor(R.color.success));
+            imgMaskot.setImageResource(R.drawable.maskot_asmara); 
+        } else {
+            tvJudul.setText("Ups! Jawabanmu Kurang Tepat");
+            tvJudul.setTextColor(getColor(R.color.danger));
+            imgMaskot.setImageResource(R.drawable.maskot_asmara); 
+        }
+        
+        tvPenjelasan.setText(penjelasan);
+
+        btnLanjut.setOnClickListener(v -> {
+            dialog.dismiss();
+            autoNextUnanswered();
+        });
+        
+        dialog.setCancelable(false);
+        dialog.show();
     }
     
     private void autoNextUnanswered() {
@@ -310,9 +363,7 @@ public class KuisActivity extends AppCompatActivity {
                 isTimeout[currentSoalIndex] = true;
                 kunciPilihan(true);
                 tampilkanJawaban(-1, soalList.get(currentSoalIndex).getJawabanBenar());
-                Snackbar.make(findViewById(android.R.id.content), "⏰ Waktu Habis!", Snackbar.LENGTH_SHORT)
-                    .setBackgroundTint(getColor(R.color.danger)).show();
-                tvPertanyaan.postDelayed(() -> autoNextUnanswered(), 1500);
+                tampilkanDialogFeedback(false, "Waktu kamu sudah habis. " + soalList.get(currentSoalIndex).getFeedback());
             }
         }.start();
     }
@@ -324,6 +375,15 @@ public class KuisActivity extends AppCompatActivity {
             tvTimer.setTextColor(getColor(R.color.danger));
         } else {
             tvTimer.setTextColor(getColor(R.color.accent_orange));
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1500 && resultCode == RESULT_OK) {
+            // Berhasil susun pintu
+            cekJawaban(0); // Pilihan 0 adalah indeks jawaban benar di Soal 15
         }
     }
 
