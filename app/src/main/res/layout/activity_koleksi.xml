@@ -35,14 +35,13 @@
                 android:layout_marginBottom="16dp"/>
 
             <!-- Card 1: Gedung Papak -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/card_papak"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_composite_16_white"
-                android:clipToOutline="true"
-                android:elevation="0dp"
+                android:layout_marginBottom="24dp"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -90,17 +89,16 @@
 
                     </LinearLayout>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Card 2: Gedung Pakuwon -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/card_pakuwon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_composite_16_white"
-                android:clipToOutline="true"
-                android:elevation="0dp"
+                android:layout_marginBottom="24dp"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -148,17 +146,16 @@
 
                     </LinearLayout>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Card 3: Rumah Dinas -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/card_rumah_dinas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/bg_composite_16_white"
-                android:clipToOutline="true"
-                android:elevation="0dp"
+                android:layout_marginBottom="24dp"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp"
                 android:clickable="true"
                 android:focusable="true">
 
@@ -206,7 +203,7 @@
 
                     </LinearLayout>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
         </LinearLayout>
     </ScrollView>

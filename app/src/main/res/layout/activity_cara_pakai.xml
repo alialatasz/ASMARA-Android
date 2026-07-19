@@ -57,14 +57,12 @@
                 android:layout_marginBottom="12dp"/>
 
             <!-- Langkah 1 -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                android:layout_marginBottom="16dp"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,17 +90,15 @@
                         android:textSize="14sp"
                         android:layout_marginStart="16dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Langkah 2 -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                android:layout_marginBottom="16dp"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -130,17 +126,15 @@
                         android:textSize="14sp"
                         android:layout_marginStart="16dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Langkah 3 -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -168,7 +162,7 @@
                         android:textSize="14sp"
                         android:layout_marginStart="16dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- ========== CARA LIHAT 3D ========== -->
             <TextView
@@ -183,14 +177,12 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
 
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                android:layout_marginBottom="16dp"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -206,17 +198,15 @@
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Info AR -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -240,7 +230,7 @@
                         android:textColor="#2E7D32"
                         android:textSize="13sp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- ========== CARA BUKA MATERI ========== -->
             <TextView
@@ -255,14 +245,12 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
 
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -278,7 +266,7 @@
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- ========== CARA MENGERJAKAN KUIS ========== -->
             <TextView
@@ -293,14 +281,12 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
 
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -316,7 +302,7 @@
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
             <!-- ========== DOWNLOAD SMARTCARD ========== -->
             <TextView
                 android:layout_width="wrap_content"
@@ -330,13 +316,12 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
 
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/bg_composite_16_white"
-                android:clipToOutline="true"
-                android:elevation="0dp">
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="24dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -364,7 +349,7 @@
                         android:paddingVertical="12dp"
                         app:cornerRadius="12dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
         </LinearLayout>
     </ScrollView>
