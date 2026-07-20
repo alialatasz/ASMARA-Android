@@ -404,12 +404,16 @@ body {
 }
 .btn-ar-icon {
   font-size: 32px;
+  position: relative;
+  z-index: 1;
 }
 .btn-ar-text {
   font-size: 19px;
   font-weight: 800;
   color: white;
   letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
 }
 
 /* === SECONDARY BUTTONS === */
@@ -428,6 +432,8 @@ body {
   gap: 8px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 .btn-secondary:active {
   transform: scale(0.96);
@@ -462,6 +468,26 @@ body {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* Watermark Logo Pattern */
+.btn-ar::after, .btn-secondary::before {
+  content: "";
+  position: absolute;
+  top: -20%; left: -20%; right: -20%; bottom: -20%;
+  background-image: url("logo_asmara2.png");
+  background-size: 50px;
+  background-repeat: repeat;
+  opacity: 0.18;
+  z-index: 0;
+  pointer-events: none;
+  transform: rotate(-15deg);
+}
+
+.btn-ar > *, .btn-secondary > * {
+  position: relative;
+  z-index: 1;
+}
+
 .btn-secondary-icon {
   font-size: 30px;
 }

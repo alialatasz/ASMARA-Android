@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView btnNotifToggle;
     private boolean notifAktif;
     private boolean arCoreDidukung = false;
+    private android.media.MediaPlayer introPlayer;
 
     // Launcher untuk meminta izin notifikasi (Android 13+)
     private final ActivityResultLauncher<String> requestPermissionLauncher =
@@ -82,6 +83,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Cek apakah HP ini mendukung ARCore
         cekDukunganAR();
+
+        // Cek apakah baru selesai onboarding untuk memutar lagu intro
+        if (getIntent().getBooleanExtra("PLAY_INTRO_HAPPY", false)) {
+            try {
+                introPlayer = android.media.MediaPlayer.create(this, R.raw.intro_happy);
+                if (introPlayer != null) {
+                    introPlayer.start();
+                    introPlayer.setOnCompletionListener(mp -> {
+                        mp.release();
+                        introPlayer = null;
+                    });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         // Navigasi profil lewat header logo
         findViewById(R.id.fl_header_avatar).setOnClickListener(v -> {
@@ -128,15 +145,13 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout btnScanQR = findViewById(R.id.btn_scan_qr);
         btnScanQR.setOnClickListener(v -> {
             animateButton(v);
-            v.postDelayed(() -> {
-                // Cek izin kamera sebelum membuka scanner
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    mulaiScanQR();
-                } else {
-                    requestCameraLauncher.launch(Manifest.permission.CAMERA);
-                }
-            }, 150);
+            // Cek izin kamera sebelum membuka scanner
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED) {
+                mulaiScanQR();
+            } else {
+                requestCameraLauncher.launch(Manifest.permission.CAMERA);
+            }
         });
 
         // =====================================================
@@ -145,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout btnPetualangan = findViewById(R.id.btn_petualangan);
         btnPetualangan.setOnClickListener(v -> {
             animateButton(v);
-            v.postDelayed(this::tampilkanDialogDunia3D, 150);
+            tampilkanDialogDunia3D();
         });
 
         // =====================================================
@@ -154,10 +169,8 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout btnKoleksi = findViewById(R.id.btn_koleksi);
         btnKoleksi.setOnClickListener(v -> {
             animateButton(v);
-            v.postDelayed(() -> {
-                Intent intent = new Intent(MainActivity.this, KoleksiActivity.class);
-                startActivity(intent);
-            }, 150);
+            Intent intent = new Intent(MainActivity.this, KoleksiActivity.class);
+            startActivity(intent);
         });
 
         // =====================================================
@@ -166,10 +179,8 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout btnCaraPakai = findViewById(R.id.btn_cara_pakai);
         btnCaraPakai.setOnClickListener(v -> {
             animateButton(v);
-            v.postDelayed(() -> {
-                Intent intent = new Intent(MainActivity.this, CaraPakaiActivity.class);
-                startActivity(intent);
-            }, 150);
+            Intent intent = new Intent(MainActivity.this, CaraPakaiActivity.class);
+            startActivity(intent);
         });
 
         // =====================================================
@@ -179,10 +190,8 @@ public class MainActivity extends AppCompatActivity {
         if (btnMateri != null) {
             btnMateri.setOnClickListener(v -> {
                 animateButton(v);
-                v.postDelayed(() -> {
-                    Intent intent = new Intent(MainActivity.this, MateriListActivity.class);
-                    startActivity(intent);
-                }, 150);
+                Intent intent = new Intent(MainActivity.this, MateriListActivity.class);
+                startActivity(intent);
             });
         }
 
@@ -193,10 +202,8 @@ public class MainActivity extends AppCompatActivity {
         if (btnKuis != null) {
             btnKuis.setOnClickListener(v -> {
                 animateButton(v);
-                v.postDelayed(() -> {
-                    Intent intent = new Intent(MainActivity.this, KuisMasukActivity.class);
-                    startActivity(intent);
-                }, 150);
+                Intent intent = new Intent(MainActivity.this, KuisMasukActivity.class);
+                startActivity(intent);
             });
         }
 
@@ -206,11 +213,22 @@ public class MainActivity extends AppCompatActivity {
         View btnLeaderboard = findViewById(R.id.btn_leaderboard);
         if (btnLeaderboard != null) {
             btnLeaderboard.setOnClickListener(v -> {
-                animateButton(v);
-                v.postDelayed(() -> {
-                    Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
-                    startActivity(intent);
-                }, 150);
+                // Khusus leaderboard, mainkan suara unik (tanpa suara klik biasa agar tidak dobel)
+                SoundHelper.playQuizSelesai();
+                // animasi custom pengganti animateButton biasa yang memainkan klik
+                android.view.animation.ScaleAnimation scale = new android.view.animation.ScaleAnimation(
+                    1f, 0.9f, 1f, 0.9f,
+                    android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f,
+                    android.view.animation.Animation.RELATIVE_TO_SELF, 0.5f
+                );
+                scale.setDuration(150);
+                scale.setRepeatCount(1);
+                scale.setRepeatMode(android.view.animation.Animation.REVERSE);
+                scale.setInterpolator(new android.view.animation.OvershootInterpolator(2f));
+                v.startAnimation(scale);
+
+                Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
+                startActivity(intent);
             });
         }
 
@@ -439,113 +457,38 @@ public class MainActivity extends AppCompatActivity {
      * Menampilkan pop-up pilihan Mode AR atau Mode Layar 3D.
      */
     private void tampilkanDialogDunia3D() {
-        // Membuat layout dialog secara programmatic
-        LinearLayout containerUtama = new LinearLayout(this);
-        containerUtama.setOrientation(LinearLayout.VERTICAL);
-        containerUtama.setPadding(60, 50, 60, 40);
-        containerUtama.setGravity(Gravity.CENTER_HORIZONTAL);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_petualangan, null);
+        
+        // Atur status dukungan ARCore
+        View btnAR = dialogView.findViewById(R.id.btn_ar_mode);
+        android.widget.TextView tvKetAR = dialogView.findViewById(R.id.tv_ket_ar);
+        ImageView ivIconAR = dialogView.findViewById(R.id.iv_icon_ar);
+        android.widget.TextView tvTextAR = dialogView.findViewById(R.id.tv_text_ar);
 
-        // Judul
-        TextView tvJudul = new TextView(this);
-        tvJudul.setText("Petualangan ASMARA");
-        tvJudul.setTextSize(22);
-        tvJudul.setTextColor(0xFF311B92);
-        tvJudul.setTypeface(null, android.graphics.Typeface.BOLD);
-        tvJudul.setGravity(Gravity.CENTER);
-        tvJudul.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_compass_purple, 0, 0, 0);
-        tvJudul.setCompoundDrawablePadding(16);
-        containerUtama.addView(tvJudul);
-
-        // Subjudul
-        TextView tvSub = new TextView(this);
-        tvSub.setText("Pilih cara kamu melihat Gedung Papak:");
-        tvSub.setTextSize(14);
-        tvSub.setTextColor(0xFF666666);
-        tvSub.setGravity(Gravity.CENTER);
-        tvSub.setPadding(0, 12, 0, 30);
-        containerUtama.addView(tvSub);
-
-        // =====================
-        // TOMBOL 1: Mode AR (Kamera)
-        // =====================
-        MaterialButton btnAR = new MaterialButton(this, null, com.google.android.material.R.attr.materialButtonOutlinedStyle);
-        btnAR.setText(arCoreDidukung ? "Mode AR (Kamera)" : "Mode AR (Tidak Didukung)");
-        btnAR.setTextSize(15);
-        btnAR.setAllCaps(false);
-        btnAR.setCornerRadius(40);
-        btnAR.setPadding(0, 30, 0, 30);
-        btnAR.setEnabled(arCoreDidukung);
-        btnAR.setIconResource(R.drawable.ic_camera);
-        btnAR.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
-
-        if (arCoreDidukung) {
-            btnAR.setBackgroundColor(0xFF6200EA);
-            btnAR.setTextColor(0xFFFFFFFF);
-            btnAR.setIconTint(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
-        } else {
-            btnAR.setBackgroundColor(0xFFBDBDBD);
-            btnAR.setTextColor(0xFF9E9E9E);
+        if (!arCoreDidukung) {
+            // Ubah warna BlurGlassView secara dinamis
+            ((com.asmara.app.BlurGlassView) btnAR).setGlassColor(0xFFBDBDBD); // Abu-abu
+            tvKetAR.setText("⚠️ HP kamu belum mendukung fitur kamera AR.\nGunakan Mode Layar 3D sebagai gantinya.");
+            tvKetAR.setTextColor(0xFFE53935);
+            ivIconAR.setColorFilter(0xFF9E9E9E);
+            tvTextAR.setTextColor(0xFF9E9E9E);
         }
 
-        LinearLayout.LayoutParams paramsTombol = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        paramsTombol.bottomMargin = 20;
-        btnAR.setLayoutParams(paramsTombol);
-        containerUtama.addView(btnAR);
-
-        // Keterangan Mode AR
-        TextView tvKetAR = new TextView(this);
-        tvKetAR.setText(arCoreDidukung ? "Letakkan gedung 3D di lantai kamarmu melalui kamera!"
-                : "⚠️ HP kamu belum mendukung fitur kamera AR.\nGunakan Mode Layar 3D sebagai gantinya.");
-        tvKetAR.setTextSize(11);
-        tvKetAR.setTextColor(arCoreDidukung ? 0xFF888888 : 0xFFE53935);
-        tvKetAR.setGravity(Gravity.CENTER);
-        tvKetAR.setPadding(0, 0, 0, 30);
-        containerUtama.addView(tvKetAR);
-
-        // =====================
-        // TOMBOL 2: Mode Layar 3D (Virtual) — KOMPATIBEL SEMUA HP
-        // =====================
-        MaterialButton btnVirtual = new MaterialButton(this);
-        btnVirtual.setText("Mode Layar 3D (Semua HP)");
-        btnVirtual.setTextSize(15);
-        btnVirtual.setAllCaps(false);
-        btnVirtual.setCornerRadius(40);
-        btnVirtual.setPadding(0, 30, 0, 30);
-        btnVirtual.setBackgroundColor(0xFF00BFA5);
-        btnVirtual.setTextColor(0xFFFFFFFF);
-        btnVirtual.setIconResource(R.drawable.ic_smartphone_white);
-        btnVirtual.setIconGravity(MaterialButton.ICON_GRAVITY_TEXT_START);
-        btnVirtual.setIconTint(android.content.res.ColorStateList.valueOf(0xFFFFFFFF));
-
-        LinearLayout.LayoutParams paramsTombol2 = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        paramsTombol2.bottomMargin = 20;
-        btnVirtual.setLayoutParams(paramsTombol2);
-        containerUtama.addView(btnVirtual);
-
-        // Keterangan Mode Virtual
-        TextView tvKetVirtual = new TextView(this);
-        tvKetVirtual.setText("Lihat gedung 3D di layar. Putar dengan jari! Semua HP bisa!");
-        tvKetVirtual.setTextSize(11);
-        tvKetVirtual.setTextColor(0xFF888888);
-        tvKetVirtual.setGravity(Gravity.CENTER);
-        containerUtama.addView(tvKetVirtual);
-
-        // Bangun Dialog
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setView(containerUtama)
+                .setView(dialogView)
                 .setCancelable(true)
                 .create();
 
         // Set aksi tombol
         btnAR.setOnClickListener(v -> {
+            if (!arCoreDidukung) return; // Jangan lakukan apa-apa jika tidak didukung
             dialog.dismiss();
             Intent intent = new Intent(MainActivity.this, MateriARActivity.class);
             startActivity(intent);
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         });
 
+        View btnVirtual = dialogView.findViewById(R.id.btn_virtual_mode);
         btnVirtual.setOnClickListener(v -> {
             dialog.dismiss();
             Intent intent = new Intent(MainActivity.this, Viewer3DActivity.class);
@@ -558,10 +501,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (dialog.getWindow() != null) {
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            dialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.GradientDrawable() {{
-                setCornerRadius(60);
-                setColor(0xFFFFFFFF);
-            }});
         }
 
         dialog.show();
@@ -589,6 +528,7 @@ public class MainActivity extends AppCompatActivity {
      * Memberikan animasi "tekan" pada tombol untuk feedback visual.
      */
     private void animateButton(View view) {
+        SoundHelper.playClick();
         ScaleAnimation scale = new ScaleAnimation(
             1f, 0.95f, 1f, 0.95f,
             Animation.RELATIVE_TO_SELF, 0.5f,
@@ -598,5 +538,17 @@ public class MainActivity extends AppCompatActivity {
         scale.setRepeatCount(1);
         scale.setRepeatMode(Animation.REVERSE);
         view.startAnimation(scale);
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (introPlayer != null) {
+            if (introPlayer.isPlaying()) {
+                introPlayer.stop();
+            }
+            introPlayer.release();
+            introPlayer = null;
+        }
+        super.onDestroy();
     }
 }
