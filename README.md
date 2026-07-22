@@ -84,51 +84,51 @@ _Intip keseruan belajar bersama ASMARA melalui cuplikan layar di bawah ini:_
 <table align="center" style="border:none;">
   <tr>
     <td align="center" valign="top" width="33%">
-      <img src="https://github.com/user-attachments/assets/679d41dc-4661-41f2-a6f1-678dbe02fe36" width="200" alt="Splash Screen" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%201.jpg" width="200" alt="Splash Screen" style="border-radius: 12px;"/><br/><br/>
       <b>✨ Pintu Masuk ASMARA</b><br/>
       <i>Splash screen ceria yang siap menyambut siswa dengan energi dan semangat belajar tinggi!</i>
     </td>
     <td align="center" valign="top" width="33%">
-      <img src="https://github.com/user-attachments/assets/5c385d97-c012-4d5e-898f-0c06d93ba3d0" width="200" alt="Onboarding" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%202.jpg" width="200" alt="Onboarding" style="border-radius: 12px;"/><br/><br/>
       <b>🗺️ Petunjuk Petualangan</b><br/>
       <i>Slide sambutan interaktif yang memandu siswa untuk mengenal berbagai fitur ajaib di dalam ASMARA.</i>
     </td>
     <td align="center" valign="top" width="33%">
-      <img src="https://github.com/user-attachments/assets/f8ba6b4a-03f7-4b6a-b701-209e617b3919" width="200" alt="Home" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%203.jpg" width="200" alt="Home" style="border-radius: 12px;"/><br/><br/>
       <b>🏠 Markas Utama</b><br/>
       <i>Halaman beranda bergaya Claymorphism! Menu-menunya empuk, lucu, dan sangat menggugah rasa penasaran.</i>
     </td>
   </tr>
   <tr>
     <td align="center" valign="top">
-      <img src="https://github.com/user-attachments/assets/af9ed07e-aea0-4a4f-9f91-89872aaabba2" width="200" alt="Profil" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%204.jpg" width="200" alt="Profil" style="border-radius: 12px;"/><br/><br/>
       <b>👤 Profil & Gamifikasi</b><br/>
       <i>Tingkatkan levelmu! Dapatkan XP dan koleksi lencana rahasia yang tersinkronisasi aman di cloud Firebase.</i>
     </td>
     <td align="center" valign="top">
-      <img src="https://github.com/user-attachments/assets/5465d97a-f56f-40ed-a8c1-93999a6ac828" width="200" alt="Sejarah" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%205.jpg" width="200" alt="Sejarah" style="border-radius: 12px;"/><br/><br/>
       <b>🏛️ Mesin Waktu Sejarah</b><br/>
       <i>Menjelajahi histori Gedung Papak dan peninggalan Salatiga untuk merawat kecintaan pada budaya lokal.</i>
     </td>
     <td align="center" valign="top">
-      <img src="https://github.com/user-attachments/assets/10382d8d-7f5b-40e3-8c8a-7dfa2a43f75e" width="200" alt="Materi" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%206.jpg" width="200" alt="Materi" style="border-radius: 12px;"/><br/><br/>
       <b>📐 Laboratorium Geometri</b><br/>
       <i>Belajar matematika tak lagi kaku. Dilengkapi narasi suara pendamping dan visualisasi 3D bangun ruang.</i>
     </td>
   </tr>
   <tr>
     <td align="center" valign="top">
-      <img src="https://github.com/user-attachments/assets/296fffcf-8726-433c-955b-f71d2b3efe67" width="200" alt="Kuis" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%207.jpg" width="200" alt="Kuis" style="border-radius: 12px;"/><br/><br/>
       <b>🎮 Arena Kuis Pintar</b><br/>
       <i>Evaluasi interaktif anti-bosan! Jawaban siswa akan direkap otomatis ke database agar mudah dipantau oleh Guru.</i>
     </td>
     <td align="center" valign="top">
-      <img src="https://github.com/user-attachments/assets/20ef1afe-7aa3-4957-ace5-dd4a58617965" width="200" alt="Leaderboard" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%208.jpg" width="200" alt="Leaderboard" style="border-radius: 12px;"/><br/><br/>
       <b>🏆 Papan Peringkat</b><br/>
       <i>Persaingan sehat pembakar semangat! Tersambung secara real-time ke Firebase untuk memperebutkan takhta juara kelas.</i>
     </td>
     <td align="center" valign="top">
-      <img src="https://github.com/user-attachments/assets/b32da5fb-a61a-4624-95a4-0aab9ae6c04b" width="200" alt="3D AR" style="border-radius: 12px;"/><br/><br/>
+      <img src="./in-app-screenshot/Foto%209.jpg" width="200" alt="3D AR" style="border-radius: 12px;"/><br/><br/>
       <b>🌟 Keajaiban Scanner 3D</b><br/>
       <i>Fitur pamungkas! Hadirkan kemegahan Gedung Papak dan Balok dalam bentuk 3D tepat di layar genggamanmu melalui pemindai QR cerdas.</i>
     </td>
