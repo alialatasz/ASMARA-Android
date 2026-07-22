@@ -84,51 +84,51 @@ _Intip keseruan belajar bersama ASMARA melalui cuplikan layar di bawah ini:_
 <table align="center" style="border:none;">
   <tr>
     <td align="center" valign="top" width="33%">
-      <img src="./Foto 1.jpg" width="200" alt="Splash Screen" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%201.jpg" width="200" alt="Splash Screen" style="border-radius: 12px;"/><br/><br/>
       <b>✨ Pintu Masuk ASMARA</b><br/>
       <i>Splash screen ceria yang siap menyambut siswa dengan energi dan semangat belajar tinggi!</i>
     </td>
     <td align="center" valign="top" width="33%">
-      <img src="./Foto 2.jpg" width="200" alt="Onboarding" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%202.jpg" width="200" alt="Onboarding" style="border-radius: 12px;"/><br/><br/>
       <b>🗺️ Petunjuk Petualangan</b><br/>
       <i>Slide sambutan interaktif yang memandu siswa untuk mengenal berbagai fitur ajaib di dalam ASMARA.</i>
     </td>
     <td align="center" valign="top" width="33%">
-      <img src="./Foto 3.jpg" width="200" alt="Home" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%203.jpg" width="200" alt="Home" style="border-radius: 12px;"/><br/><br/>
       <b>🏠 Markas Utama</b><br/>
       <i>Halaman beranda bergaya Claymorphism! Menu-menunya empuk, lucu, dan sangat menggugah rasa penasaran.</i>
     </td>
   </tr>
   <tr>
     <td align="center" valign="top">
-      <img src="./Foto 4.jpg" width="200" alt="Profil" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%204.jpg" width="200" alt="Profil" style="border-radius: 12px;"/><br/><br/>
       <b>👤 Profil & Gamifikasi</b><br/>
       <i>Tingkatkan levelmu! Dapatkan XP dan koleksi lencana rahasia yang tersinkronisasi aman di cloud Firebase.</i>
     </td>
     <td align="center" valign="top">
-      <img src="./Foto 5.jpg" width="200" alt="Sejarah" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%205.jpg" width="200" alt="Sejarah" style="border-radius: 12px;"/><br/><br/>
       <b>🏛️ Mesin Waktu Sejarah</b><br/>
       <i>Menjelajahi histori Gedung Papak dan peninggalan Salatiga untuk merawat kecintaan pada budaya lokal.</i>
     </td>
     <td align="center" valign="top">
-      <img src="./Foto 6.jpg" width="200" alt="Materi" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%206.jpg" width="200" alt="Materi" style="border-radius: 12px;"/><br/><br/>
       <b>📐 Laboratorium Geometri</b><br/>
       <i>Belajar matematika tak lagi kaku. Dilengkapi narasi suara pendamping dan visualisasi 3D bangun ruang.</i>
     </td>
   </tr>
   <tr>
     <td align="center" valign="top">
-      <img src="./Foto 7.jpg" width="200" alt="Kuis" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%207.jpg" width="200" alt="Kuis" style="border-radius: 12px;"/><br/><br/>
       <b>🎮 Arena Kuis Pintar</b><br/>
       <i>Evaluasi interaktif anti-bosan! Jawaban siswa akan direkap otomatis ke database agar mudah dipantau oleh Guru.</i>
     </td>
     <td align="center" valign="top">
-      <img src="./Foto 8.jpg" width="200" alt="Leaderboard" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%208.jpg" width="200" alt="Leaderboard" style="border-radius: 12px;"/><br/><br/>
       <b>🏆 Papan Peringkat</b><br/>
       <i>Persaingan sehat pembakar semangat! Tersambung secara real-time ke Firebase untuk memperebutkan takhta juara kelas.</i>
     </td>
     <td align="center" valign="top">
-      <img src="./Foto 9.jpg" width="200" alt="3D AR" style="border-radius: 12px;"/><br/><br/>
+      <img src="./Foto%209.jpg" width="200" alt="3D AR" style="border-radius: 12px;"/><br/><br/>
       <b>🌟 Keajaiban Scanner 3D</b><br/>
       <i>Fitur pamungkas! Hadirkan kemegahan Gedung Papak dan Balok dalam bentuk 3D tepat di layar genggamanmu melalui pemindai QR cerdas.</i>
     </td>
