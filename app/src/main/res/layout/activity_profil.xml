@@ -137,15 +137,15 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Card: Nama Anak -->
-        <FrameLayout
+        <com.asmara.app.BlurGlassView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_composite_20_white"
-        android:clipToOutline="true"
-            android:elevation="0dp"
+            app:glassColor="#FFFFFF"
+            app:glassCornerRadius="20dp"
+            android:clipToOutline="true"
         >
 
             <LinearLayout
@@ -251,7 +251,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </FrameLayout>
+        </com.asmara.app.BlurGlassView>
 
         <!-- Section: Statistik -->
         <TextView
@@ -276,14 +276,14 @@
             android:weightSum="3">
 
             <!-- Stat 1: Total Bintang -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="6dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="16dp"
+                android:clipToOutline="true"
         >
 
                 <LinearLayout
@@ -313,21 +313,20 @@
                         android:layout_height="wrap_content"
                         android:text="Bintang"
                         android:textSize="11sp"
-                        android:textColor="@color/text_light"
+                        android:textColor="@color/primary_light"
                         android:gravity="center"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Stat 2: Kuis Selesai -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="3dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="16dp"
+                android:clipToOutline="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -356,21 +355,20 @@
                         android:layout_height="wrap_content"
                         android:text="Kuis Selesai"
                         android:textSize="11sp"
-                        android:textColor="@color/text_light"
+                        android:textColor="@color/primary_light"
                         android:gravity="center"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Stat 3: Skor Terbaik -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="6dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="16dp"
+                android:clipToOutline="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -399,10 +397,10 @@
                         android:layout_height="wrap_content"
                         android:text="Skor Terbaik"
                         android:textSize="11sp"
-                        android:textColor="@color/text_light"
+                        android:textColor="@color/primary_light"
                         android:gravity="center"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
         </LinearLayout>
 
@@ -430,16 +428,15 @@
             android:weightSum="2">
 
             <!-- Badge 1 -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/badge_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="16dp"
+                android:clipToOutline="true">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -457,7 +454,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/primary_dark"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge1_desc"
                         android:layout_width="wrap_content"
@@ -465,22 +462,21 @@
                         android:text="Selesaikan 1 kuis"
                         android:textSize="10sp"
                         android:gravity="center"
-                        android:textColor="@color/text_light"
+                        android:textColor="@color/primary_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Badge 2 -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/badge_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="16dp"
+                android:clipToOutline="true">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -498,7 +494,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/primary_dark"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge2_desc"
                         android:layout_width="wrap_content"
@@ -506,10 +502,10 @@
                         android:text="Raih skor ≥ 90"
                         android:textSize="10sp"
                         android:gravity="center"
-                        android:textColor="@color/text_light"
+                        android:textColor="@color/primary_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
         </LinearLayout>
 
@@ -522,16 +518,15 @@
             android:weightSum="2">
 
             <!-- Badge 3 -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/badge_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="16dp"
+                android:clipToOutline="true">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -549,7 +544,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/primary_dark"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge3_desc"
                         android:layout_width="wrap_content"
@@ -557,22 +552,21 @@
                         android:text="Selesaikan 3 kuis"
                         android:textSize="10sp"
                         android:gravity="center"
-                        android:textColor="@color/text_light"
+                        android:textColor="@color/primary_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
             <!-- Badge 4 -->
-            <FrameLayout
+            <com.asmara.app.BlurGlassView
                 android:id="@+id/badge_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:background="@drawable/bg_composite_16_white"
-        android:clipToOutline="true"
-                android:elevation="0dp"
-        >
+                app:glassColor="#FFFFFF"
+                app:glassCornerRadius="16dp"
+                android:clipToOutline="true">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -590,7 +584,7 @@
                         android:textSize="12sp"
                         android:textStyle="bold"
                         android:gravity="center"
-                        android:textColor="@color/white"
+                        android:textColor="@color/primary_dark"
                         android:layout_marginTop="6dp"/>
                     <TextView android:id="@+id/tv_badge4_desc"
                         android:layout_width="wrap_content"
@@ -598,10 +592,10 @@
                         android:text="Selesaikan 5 kuis"
                         android:textSize="10sp"
                         android:gravity="center"
-                        android:textColor="@color/text_light"
+                        android:textColor="@color/primary_light"
                         android:layout_marginTop="2dp"/>
                 </LinearLayout>
-            </FrameLayout>
+            </com.asmara.app.BlurGlassView>
 
         </LinearLayout>
 

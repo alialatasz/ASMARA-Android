@@ -53,11 +53,11 @@ public class OnboardingActivity extends AppCompatActivity {
             if (viewPagerOnboarding.getCurrentItem() + 1 < onboardingAdapter.getItemCount()) {
                 viewPagerOnboarding.setCurrentItem(viewPagerOnboarding.getCurrentItem() + 1);
             } else {
-                finishOnboarding();
+                finishOnboarding(true);
             }
         });
 
-        tvSkip.setOnClickListener(v -> finishOnboarding());
+        tvSkip.setOnClickListener(v -> finishOnboarding(true));
     }
 
     private void setupOnboardingItems() {
@@ -107,24 +107,14 @@ public class OnboardingActivity extends AppCompatActivity {
         }
     }
 
-    private void finishOnboarding() {
-        // Mainkan suara intro happy (singkat)
-        try {
-            android.media.MediaPlayer player = android.media.MediaPlayer.create(this, R.raw.intro_happy);
-            if (player != null) {
-                player.start();
-                player.setOnCompletionListener(android.media.MediaPlayer::release);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    private void finishOnboarding(boolean playIntro) {
         // Simpan flag bahwa onboarding sudah selesai
         SharedPreferences prefs = getSharedPreferences("ASMARA_PREFS", MODE_PRIVATE);
         prefs.edit().putBoolean("isFirstRun", false).apply();
 
         // Buka MainActivity
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("PLAY_INTRO_HAPPY", playIntro);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();

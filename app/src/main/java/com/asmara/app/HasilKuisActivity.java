@@ -74,10 +74,24 @@ public class HasilKuisActivity extends AppCompatActivity {
             star1.setAlpha(0.3f); star2.setAlpha(0.3f); star3.setAlpha(0.3f);
         }
 
+        // Tembakkan Konfeti!
+        ConfettiView confettiView = findViewById(R.id.confetti_view);
+        if (confettiView != null && skor >= 70) {
+            confettiView.startConfetti();
+        }
+
+        // Mainkan SFX kuis selesai
+        android.media.MediaPlayer sfxPlayer = android.media.MediaPlayer.create(this, R.raw.quiz_selesai);
+        if (sfxPlayer != null) {
+            sfxPlayer.start();
+            sfxPlayer.setOnCompletionListener(android.media.MediaPlayer::release);
+        }
+
         // Tombol Ulangi Kuis
         android.view.View btnUlangi = findViewById(R.id.btn_ulangi_kuis);
         if (btnUlangi != null) {
             btnUlangi.setOnClickListener(v -> {
+                SoundHelper.playClick();
                 Intent intent = new Intent(HasilKuisActivity.this, KuisMasukActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -88,6 +102,7 @@ public class HasilKuisActivity extends AppCompatActivity {
         // Tombol Kembali ke Home
         android.view.View btnHome = findViewById(R.id.btn_kembali_home);
         btnHome.setOnClickListener(v -> {
+            SoundHelper.playClick();
             Intent intent = new Intent(HasilKuisActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

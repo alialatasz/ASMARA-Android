@@ -29,6 +29,7 @@ public class KoleksiActivity extends AppCompatActivity {
 
         if (cardPapak != null) {
             cardPapak.setOnClickListener(v -> {
+                AnimationHelper.animateButton(v);
                 android.content.Intent intent = new android.content.Intent(KoleksiActivity.this, SejarahDetailActivity.class);
                 intent.putExtra("NAMA_GEDUNG", "Papak");
                 startActivity(intent);
@@ -37,6 +38,7 @@ public class KoleksiActivity extends AppCompatActivity {
 
         if (cardPakuwon != null) {
             cardPakuwon.setOnClickListener(v -> {
+                AnimationHelper.animateButton(v);
                 android.content.Intent intent = new android.content.Intent(KoleksiActivity.this, SejarahDetailActivity.class);
                 intent.putExtra("NAMA_GEDUNG", "Pakuwon");
                 startActivity(intent);
@@ -46,6 +48,7 @@ public class KoleksiActivity extends AppCompatActivity {
         android.view.View cardRumahDinas = findViewById(R.id.card_rumah_dinas);
         if (cardRumahDinas != null) {
             cardRumahDinas.setOnClickListener(v -> {
+                AnimationHelper.animateButton(v);
                 android.content.Intent intent = new android.content.Intent(KoleksiActivity.this, SejarahDetailActivity.class);
                 intent.putExtra("NAMA_GEDUNG", "RumahDinas");
                 startActivity(intent);

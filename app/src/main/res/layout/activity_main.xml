@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-    android:background="@drawable/bg_pattern_tiled">
+            android:background="@drawable/bg_pattern_tiled">
 
             <!-- Header (Small) -->
             <LinearLayout
@@ -150,7 +150,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="8dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <!-- Tombol 1: Petualangan ASMARA -->
                     <com.asmara.app.BlurGlassView
@@ -159,6 +161,8 @@
                         android:layout_height="140dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="4dp"
                         android:clickable="true"
                         android:focusable="true"
                         app:glassColor="#CFECF3"
@@ -197,6 +201,8 @@
                         android:layout_height="140dp"
                         android:layout_weight="1"
                         android:layout_marginStart="6dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="4dp"
                         android:clickable="true"
                         android:focusable="true"
                         app:glassColor="#F7E49B"
@@ -236,7 +242,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="8dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <!-- Tombol 3: Scan QR -->
                     <com.asmara.app.BlurGlassView
@@ -245,6 +253,8 @@
                         android:layout_height="140dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="4dp"
                         android:clickable="true"
                         android:focusable="true"
                         app:glassColor="#FDACAC"
@@ -283,6 +293,8 @@
                         android:layout_height="140dp"
                         android:layout_weight="1"
                         android:layout_marginStart="6dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="4dp"
                         android:clickable="true"
                         android:focusable="true"
                         app:glassColor="#CFECF3"
@@ -322,7 +334,9 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2"
-                    android:layout_marginBottom="16dp">
+                    android:layout_marginBottom="8dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
 
                     <!-- Tombol 5: Koleksi Sejarah -->
                     <com.asmara.app.BlurGlassView
@@ -331,6 +345,8 @@
                         android:layout_height="140dp"
                         android:layout_weight="1"
                         android:layout_marginEnd="6dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="4dp"
                         android:clickable="true"
                         android:focusable="true"
                         app:glassColor="#F7E49B"
@@ -346,8 +362,8 @@
                             android:padding="6dp">
 
                             <ImageView
-                                android:layout_width="140dp"
-                                android:layout_height="140dp"
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
                                 android:src="@drawable/ic_collection" />
 
                             <TextView
@@ -369,6 +385,8 @@
                         android:layout_height="140dp"
                         android:layout_weight="1"
                         android:layout_marginStart="6dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginTop="4dp"
                         android:clickable="true"
                         android:focusable="true"
                         app:glassColor="#FDACAC"
@@ -406,8 +424,9 @@
                 <com.asmara.app.BlurGlassView
                     android:id="@+id/btn_leaderboard"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_height="120dp"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="4dp"
                     android:clickable="true"
                     android:focusable="true"
                     app:glassColor="#CFECF3"
@@ -426,8 +445,8 @@
                             android:layout_width="64dp"
                             android:layout_height="64dp"
                             android:layout_marginEnd="88dp"
-                            android:scaleX="3.9"
-                            android:scaleY="3.9"
+                            android:scaleX="3.7"
+                            android:scaleY="3.7"
                             android:scaleType="fitCenter"
                             android:src="@drawable/ic_peringkat"/>
 

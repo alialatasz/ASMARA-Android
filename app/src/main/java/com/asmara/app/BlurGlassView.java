@@ -51,26 +51,10 @@ public class BlurGlassView extends FrameLayout {
             cornerRadius = dpToPx(24);
         }
 
-        // Gunakan GradientDrawable native sebagai background parent.
-        // Ini adalah trik rahasia agar OS Android menggambar bayangan drop shadow (elevation)
-        // 100% sempurna membulat tanpa bug kotak, karena OS mengenali bentuk background ini.
-        android.graphics.drawable.GradientDrawable bgDrawable = new android.graphics.drawable.GradientDrawable();
-        bgDrawable.setShape(android.graphics.drawable.GradientDrawable.RECTANGLE);
-        bgDrawable.setCornerRadius(cornerRadius);
-        int solidColor = Color.rgb(Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor));
-        bgDrawable.setColor(solidColor);
-        setBackground(bgDrawable);
-
-        setElevation(dpToPx(elevationDp));
-        
-        setOutlineProvider(new android.view.ViewOutlineProvider() {
-            @Override
-            public void getOutline(View view, android.graphics.Outline outline) {
-                outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), cornerRadius);
-            }
-        });
-        setClipToOutline(true);
+        // Kita gambar shadow manual karena elevation native jelek dengan software layer
         setLayerType(LAYER_TYPE_SOFTWARE, null);
+        setBackground(null); // hapus background bawaan
+        setElevation(0);
         setWillNotDraw(false);
 
         rect = new RectF();
@@ -81,14 +65,14 @@ public class BlurGlassView extends FrameLayout {
         
         lightPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         lightPaint.setStyle(Paint.Style.FILL);
-        lightPaint.setColor(Color.parseColor("#99FFFFFF")); 
-        lightPaint.setMaskFilter(new BlurMaskFilter(dpToPx(8f), BlurMaskFilter.Blur.NORMAL));
+        lightPaint.setColor(Color.parseColor("#E6FFFFFF")); // Inner light
+        lightPaint.setMaskFilter(new BlurMaskFilter(dpToPx(6f), BlurMaskFilter.Blur.NORMAL));
         lightPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_ATOP));
 
         shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         shadowPaint.setStyle(Paint.Style.FILL);
-        shadowPaint.setColor(Color.parseColor("#11000000")); 
-        shadowPaint.setMaskFilter(new BlurMaskFilter(dpToPx(8f), BlurMaskFilter.Blur.NORMAL));
+        shadowPaint.setColor(Color.parseColor("#40000000")); // Inner dark shadow
+        shadowPaint.setMaskFilter(new BlurMaskFilter(dpToPx(6f), BlurMaskFilter.Blur.NORMAL));
         shadowPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_ATOP));
 
         updateColor();
@@ -98,18 +82,11 @@ public class BlurGlassView extends FrameLayout {
         this.baseColor = color;
         updateColor();
     }
-    
+
     private void updateColor() {
-        if (basePaint == null) return;
         int solidColor = Color.rgb(Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor));
-        if (getBackground() instanceof android.graphics.drawable.GradientDrawable) {
-            ((android.graphics.drawable.GradientDrawable) getBackground()).setColor(solidColor);
-        }
         basePaint.setColor(solidColor);
         invalidate();
-    }
-
-    public void setBlurRadius(float radius) {
     }
 
     private float dpToPx(float dp) {
@@ -119,16 +96,21 @@ public class BlurGlassView extends FrameLayout {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        rect.set(0, 0, w, h);
+        
+        // Buat margin untuk drop shadow luar
+        float margin = dpToPx(elevationDp) + dpToPx(2f);
+        rect.set(margin, margin, w - margin, h - margin);
         
         basePath.reset();
         basePath.addRoundRect(rect, cornerRadius, cornerRadius, Path.Direction.CW);
         
         inversePath.reset();
         inversePath.setFillType(Path.FillType.EVEN_ODD); 
-        float expand = dpToPx(60f); 
+        float expand = dpToPx(40f); 
         inversePath.addRect(-expand, -expand, w + expand, h + expand, Path.Direction.CW);
         inversePath.addPath(basePath); 
+        
+        invalidateOutline();
     }
 
     @Override
@@ -136,19 +118,30 @@ public class BlurGlassView extends FrameLayout {
         super.onDraw(canvas);
         if (basePath == null) return;
         
-        // Gunakan offscreen buffer (saveLayer) agar efek SRC_ATOP hanya berlaku 
-        // di dalam area basePath dan tidak tumpah/meluber ke luar batas kotak!
+        // 1. Gambar Outer Drop Shadow manual
+        Paint dropShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        dropShadowPaint.setColor(Color.parseColor("#25000000"));
+        dropShadowPaint.setMaskFilter(new BlurMaskFilter(dpToPx(elevationDp), BlurMaskFilter.Blur.NORMAL));
+        canvas.save();
+        canvas.translate(0, dpToPx(3f)); // shadow agak ke bawah
+        canvas.drawPath(basePath, dropShadowPaint);
+        canvas.restore();
+
+        // 2. Gunakan offscreen buffer untuk shape dan inner shadow
         int saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null);
         
+        // Gambar base shape
         canvas.drawPath(basePath, basePaint);
 
+        // Gambar Inner Highlight (Kiri Atas)
         canvas.save();
-        canvas.translate(dpToPx(4f), dpToPx(4f));
+        canvas.translate(dpToPx(3f), dpToPx(3f));
         canvas.drawPath(inversePath, lightPaint);
         canvas.restore();
 
+        // Gambar Inner Shadow (Kanan Bawah)
         canvas.save();
-        canvas.translate(-dpToPx(4f), -dpToPx(4f));
+        canvas.translate(-dpToPx(3f), -dpToPx(3f));
         canvas.drawPath(inversePath, shadowPaint);
         canvas.restore();
         
