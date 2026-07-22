@@ -1,52 +1,85 @@
 <div align="center">
+
 # 🦉 ASMARA 🦉
 **Aplikasi Semarak Matematika dan Sejarah Nusantara**
+
 [![Android Version](https://img.shields.io/badge/Android-7.0%2B-3DDC84?style=for-the-badge&logo=android)](https://developer.android.com/)
 [![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com/)
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![UI/UX](https://img.shields.io/badge/UI-Claymorphism-FF69B4?style=for-the-badge)](https://dribbble.com/)
+
 _Membawa pesona Sejarah Lokal Salatiga ke dalam asyiknya belajar Geometri Ruang!_ 🚀
+
 ---
 </div>
+
 ## Tentang ASMARA
-**ASMARA** diciptakan untuk menjawab tantangan dunia pendidikan dasar: _Bagaimana membuat anak kelas 5 SD jatuh cinta pada Matematika dan Sejarah?_
+
+**ASMARA** diciptakan untuk menjawab tantangan dunia pendidikan dasar: _Bagaimana membuat anak-anak SD jatuh cinta pada Matematika dan Sejarah?_
+
 Alih-alih diberi teks membosankan, ASMARA mengajak siswa dalam sebuah "Game Petualangan". Aplikasi ini menggabungkan materi Bangun Ruang (Kubus, Balok, Limas) dengan representasi nyata dari bangunan bersejarah peninggalan kolonial di Kota Salatiga, seperti **Gedung Papak**, **Gedung Pakuwon**, dan **Rumah Dinas Wali Kota**.
+
 <br/>
+
 ## Fitur Unggulan
+
 ### 1. Desain _Claymorphism_ yang Ramah Anak 🧊
+
 Selamat tinggal desain kotak yang kaku! Antarmuka ASMARA dibangun 100% menggunakan tren desain modern **Claymorphism**. Kombinasi _drop shadow_ 3D, _inner glow_, dan animasi _bouncy overshoot_ membuat setiap tombol di aplikasi ini terasa seperti "malam plastisin" yang empuk dan interaktif.
+
 ### 2. Penampil 3D Interaktif (Universal) 📐
+
 Siswa dapat memutar, memperbesar, dan melihat jaring-jaring bangun ruang secara 360 derajat. Mesin 3D kami dirancang untuk berjalan super mulus di semua jenis _smartphone_ (bahkan HP _entry-level_ sekalipun) tanpa mewajibkan sensor ARCore!
+
 ### 3. Kuis Interaktif & Drag-and-Drop 🎮
+
 Ujian tidak lagi menakutkan! Kuis ASMARA dilengkapi timer berdetak, penanda warna, fitur ragu-ragu, dan **soal praktik spesial (Susun Balok Drag-and-Drop)** yang melatih motorik anak secara langsung.
+
 ### 4. Sistem Gamifikasi (Leaderboard & XP) 🏆
+
 - Siapa yang paling pintar di kelas? Fitur **Papan Peringkat (Leaderboard)** _real-time_ yang ditenagai oleh Firebase siap menumbuhkan semangat kompetitif!
 - Kumpulkan poin (_XP_), dapatkan bintang, dan koleksi **Lencana Kehormatan** (_Badges_) rahasia di halaman Profil Penjelajah Anda!
+
 ### 5. Maskot & Panduan Audio 🦉
+
 Ditemani oleh Maskot Rubah pintar yang akan menyoraki siswa saat menjawab benar (lengkap dengan hujan partikel Konfeti 🎉) dan memberi penjelasan ramah saat jawaban salah. Didukung pula narasi _audio voice-over_ untuk setiap materi sejarah!
+
 <br/>
+
 ## Teknologi yang Digunakan 🛠️
+
 - **Bahasa Pemrograman:** Native Java
 - **Database & Backend:** Firebase Realtime Database
 - **UI Komponen:** Kustom `BlurGlassView` via Android Canvas API
 - **Animasi:** `ObjectAnimator` dengan `OvershootInterpolator`
 - **3D Rendering:** Integrasi WebView dengan Google `model-viewer` & GLB Assets
+
 <br/>
+
 ## Cara Menjalankan Project 🚀
+
 Bagi Anda yang ingin mengembangkan atau melihat langsung _source code_ ASMARA, ikuti langkah berikut:
+
 1. **Clone repositori ini**
    ```bash
    git clone https://github.com/username/ASMARA.git
    ```
+
 2. **Buka di Android Studio**
    Buka aplikasi Android Studio, pilih `File > Open`, lalu arahkan ke folder `ASMARA` yang baru saja diunduh.
+
 3. **Konfigurasi Firebase** (Opsional jika ingin menggunakan database sendiri)
    Ganti file `google-services.json` di dalam folder `app/` dengan milik Anda dari [Firebase Console](https://console.firebase.google.com/).
+
 4. **Build & Run**
    Klik logo ▶️ **Run 'app'** di Android Studio atau tekan `Shift + F10`.
+
 <br/>
+
 ## Galeri Petualangan (Screenshots) 📷
+
 _Intip keseruan belajar bersama ASMARA melalui cuplikan layar di bawah ini:_
+
 <table align="center" style="border:none;">
   <tr>
     <td align="center" valign="top" width="33%">
@@ -100,12 +133,17 @@ _Intip keseruan belajar bersama ASMARA melalui cuplikan layar di bawah ini:_
     </td>
   </tr>
 </table>
+
 <br/>
+
 ## Lisensi 📜
+
 Aplikasi ini dikembangkan untuk tujuan edukasi dan peningkatan mutu pendidikan dasar di Indonesia.
 Dibuat dengan ❤️ untuk anak-anak Nusantara.
 Tim ASMARA. PKM PIMNAS 2026. Universitas Negeri Semarang.
+
 ---
+
 <div align="center">
   <i>"Belajar Matematika itu Menyenangkan, Mengenal Sejarah itu Membanggakan!"</i>
 </div>
